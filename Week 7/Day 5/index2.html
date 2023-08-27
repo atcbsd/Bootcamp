@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <section id="quote-container"></section>
+    <button id="generate-btn">Generate Quote</button>
+
+      
+
+<script>
+    // Array of quotes
+const quotes = [
+    { id: 0, author: "Unknown", quote: "The best way to predict the future is to create it." },
+    { id: 1, author: "Walt Disney", quote: "All our dreams can come true, if we have the courage to pursue them." },
+    { id: 2, author: "Albert Einstein", quote: "Try not to become a man of success, but rather try to become a man of value." },
+    { id: 3, author: "Maya Angelou", quote: "I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel." },
+    { id: 4, author: "Steve Jobs", quote: "Innovation distinguishes between a leader and a follower." },
+];
+
+// Variable to store used quotes
+let usedQuotes = [];
+
+// Function to get a random quote
+function getRandomQuote() {
+    let quote = null;
+    do {
+        quote = quotes[Math.floor(Math.random() * quotes.length)];
+    } while (usedQuotes.includes(quote));
+    usedQuotes.push(quote);
+    return quote;
+}
+
+// prueba
+
+
+// Function to display a quote in the DOM
+function displayQuote() {
+    const quoteContainer = document.getElementById("quote-container");
+    const quote = getRandomQuote();
+
+    quoteContainer.innerHTML = `
+        <div>
+            <h2>${quote.quote}</h2>
+            <p>- ${quote.author}</p>
+        </div>
+    `;
+}
+
+// Generate quote on button click
+const generateBtn = document.getElementById("generate-btn");
+generateBtn.addEventListener("click", displayQuote);
+
+// Display initial quote
+displayQuote();
+
+</script> -->
+
+
+
+
+
+
+<!-- que se repita el quote -->
+
+<section id="quote-container"></section>
+<button id="generate-btn">Generate Quote</button>
+
+<script>
+  // Array of quotes
+  const quotes = [
+    { id: 0, author: "Unknown", quote: "The best way to predict the future is to create it." },
+    { id: 1, author: "Walt Disney", quote: "All our dreams can come true, if we have the courage to pursue them." },
+    { id: 2, author: "Albert Einstein", quote: "Try not to become a man of success, but rather try to become a man of value." },
+    { id: 3, author: "Maya Angelou", quote: "I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel." },
+    { id: 4, author: "Steve Jobs", quote: "Innovation distinguishes between a leader and a follower." },
+  ];
+
+  // Variable to store used quotes
+  let usedQuotes = [];
+
+  // Function to get a random quote
+  function getRandomQuote() {
+    let quote = null;
+    do {
+      quote = quotes[Math.floor(Math.random() * quotes.length)];
+    } while (usedQuotes.includes(quote));
+    usedQuotes.push(quote);
+    if (usedQuotes.length === quotes.length) {
+      usedQuotes = [];
+    }
+    return quote;
+  }
+
+  // Function to display a quote in the DOM
+  function displayQuote() {
+    const quoteContainer = document.getElementById("quote-container");
+    const quote = getRandomQuote();
+
+    quoteContainer.innerHTML = `
+      <div>
+        <h2>${quote.quote}</h2>
+        <p>- ${quote.author}</p>
+      </div>
+    `;
+  }
+
+  // Generate quote on button click
+  const generateBtn = document.getElementById("generate-btn");
+  generateBtn.addEventListener("click", displayQuote);
+
+  // Display initial quote
+  displayQuote();
+</script>
+
+
+<style>
+    /* Estilos para el contenedor de la cita */
+#quote-container {
+  background-color: #a9767671;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+#quote-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#quote-container p {
+  font-size: 1.2rem;
+}
+
+/* Estilos para el botón de generar cita */
+#generate-btn {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+#generate-btn:hover {
+  background-color: #0056b3;
+}
+
+</style>
+</body>
+</html>

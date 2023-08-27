@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+button[type="submit"] {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: 1px solid #4CAF50;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.weather-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+#weatherIcon {
+  width: 100px;
+  height: 100px;
+}
+
+#weatherDesc {
+  text-transform: capitalize;
+}
+
+#previousSearches {
+  list-style-type: none;
+  margin-top: 20px;
+}
+
+#previousSearches li {
+  margin-bottom: 10px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+#previousSearches li:hover {
+  background-color: #f58989;
+  display: inline-block;
+  padding: 2px;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form id="cityForm">
+          <input type="text" id="cityInput" placeholder="Enter a city...">
+          <button type="submit">Submit</button>
+        </form>
+        <div id="weatherCard" class="weather-card hide">
+          <h2 id="cityName"></h2>
+          <h3 id="countryName"></h3>
+          <div id="weatherInfo">
+            <img id="weatherIcon" src="" alt="Weather Icon">
+            <p id="weatherDesc"></p>
+          </div>
+          <p id="temp"></p>
+          <p id="humidity"></p>
+        </div>
+        <div id="error" class="hide">
+          <p>Invalid city. Please try again.</p>
+        </div>
+        <h2>Previous Searches</h2>
+        <ul id="previousSearches"></ul>
+      </div>
+      <ul id="previousSearches" class="cursor-pointer"></ul>
+      <p id="sunrise"></p>
+<p id="sunset"></p>
+
+
+      
+      <script>
+const apiKey = "6bc236fa8bd5e7e03f83fd8cea3eac74";
+const cityForm = document.querySelector("#cityForm");
+const cityInput = document.querySelector("#cityInput");
+const weatherCard = document.querySelector("#weatherCard");
+const cityName = document.querySelector("#cityName");
+const countryName = document.querySelector("#countryName");
+const weatherIcon = document.querySelector("#weatherIcon");
+const weatherDesc = document.querySelector("#weatherDesc");
+const temp = document.querySelector("#temp");
+const humidity = document.querySelector("#humidity");
+const sunrise = document.querySelector("#sunrise");
+const sunset = document.querySelector("#sunset");
+
+const error = document.querySelector("#error");
+const previousSearches = document.querySelector("#previousSearches");
+
+let cityWeatherData = {};
+
+// Función para obtener los datos del clima de la ciudad desde la API
+const getCityWeather = async (city) => {
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    if (data.cod === 200) {
+      return data;
+    } else {
+      throw new Error("City not found");
+    }
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+
+// Función para mostrar los datos del clima en la tarjeta
+const displayWeatherData = () => {
+  cityName.textContent = cityWeatherData.name;
+  countryName.textContent = cityWeatherData.sys.country;
+  weatherIcon.src = `https://openweathermap.org/img/w/${cityWeatherData.weather[0].icon}.png`;
+  weatherDesc.textContent = cityWeatherData.weather[0].description;
+  temp.textContent = `Temperature: ${Math.round(cityWeatherData.main.temp - 273.15)}°C`;
+  humidity.textContent = `Humidity: ${cityWeatherData.main.humidity}%`;
+};
+
+// Función para mostrar un mensaje de error
+const displayError = () => {
+  error.classList.remove("hide");
+  setTimeout(() => {
+    error.classList.add("hide");
+  }, 3000);
+};
+
+// Función para guardar los datos del clima de la ciudad
+const saveCityWeatherData = () => {
+  localStorage.setItem(cityWeatherData.name, JSON.stringify(cityWeatherData));
+  const li = document.createElement("li");
+  li.textContent = cityWeatherData.name;
+  li.addEventListener("click", () => {
+    displayPreviousSearchData(cityWeatherData);
+  });
+  previousSearches.appendChild(li);
+};
+
+// Función para mostrar los datos de búsqueda previa
+const displayPreviousSearchData = (searchData) => {
+  cityName.textContent = searchData.name;
+  countryName.textContent = searchData.sys.country;
+  weatherIcon.src = `https://openweathermap.org/img/w/${searchData.weather[0].icon}.png`;
+  weatherDesc.textContent = searchData.weather[0].description;
+  temp.textContent = `Temperature: ${Math.round(searchData.main.temp - 273.15)}°C`;
+  humidity.textContent = `Humidity: ${searchData.main.humidity}%`;
+  sunrise.textContent = `Sunrise: ${new Date(cityWeatherData.sys.sunrise * 1000).toLocaleTimeString()}`;
+  sunset.textContent = `Sunset: ${new Date(cityWeatherData.sys.sunset * 1000).toLocaleTimeString()}`;
+  weatherCard.classList.remove("hide");
+    
+};
+
+// Event listener para el envío del formulario
+cityForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const city = cityInput.value.trim();
+  if (city !== "") {
+    cityInput.value = "";
+    cityWeatherData = await getCityWeather(city);
+    if (cityWeatherData) {
+      displayWeatherData();
+      saveCityWeatherData();
+      weatherCard.classList.remove("hide");
+    } else {
+      displayError();
+    }
+  }
+});
+
+// Función para cargar los datos de búsqueda previa
+const loadPreviousSearchData = () => {
+  Object.keys(localStorage).forEach((key) => {
+    const li = document.createElement("li");
+    li.textContent = key;
+    li.addEventListener("click", () => {
+      const searchData = JSON.parse(localStorage.getItem(key));
+      if (searchData) {
+        displayPreviousSearchData(searchData);
+      } else {
+        console.log("No se encontraron resultados para la clave:", key);
+      }
+    });
+    previousSearches.appendChild(li);
+  });
+};
+
+loadPreviousSearchData();
+
+
+
+
+
+
+// Event listener for previous searches
+previousSearches.addEventListener("click", (e) => {
+  const li = e.target;
+  if (li.tagName === "LI") {
+    const city = li.textContent;
+    const data = JSON.parse(localStorage.getItem(city));
+    if (data) {
+      cityWeatherData = data;
+      displayWeatherData();
+      weatherCard.classList.remove("hide");
+    }
+  }
+})
+
+      </script>
+    
+</body>
+</html>

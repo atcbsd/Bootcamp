@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping List</title>
+</head>
+<body>
+  <h1>Shopping List</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Item</th>
+      <th>Amount</th>
+    </tr>
+    <% items.forEach(item => { %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= item.item %></td>
+        <td><%= item.amount %></td>
+      </tr>
+    <% }); %>
+  </table>
+</body>
+</html>

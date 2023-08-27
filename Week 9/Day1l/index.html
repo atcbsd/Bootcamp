@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON AJAX</title>
+    <style>
+      /* Button styles */
+      #button {
+        background-color: #f44336;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      #button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Response paragraph styles */
+      #response {
+        font-size: 20px;
+        line-height: 1.5;
+        color: #333;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        padding: 16px;
+        margin-top: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <form id="login-form" onsubmit="submitForm(event)" method="POST" action="#">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" /><br />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" /><br />
+      <label for="casa">Casa:</label>
+      <input type="number" id="casa" name="casa" /><br />
+      <label for="lugar">Lugar:</label>
+      <input type="text" id="lugar" name="lugar" /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h2 id="welcome-msg" style="display: none">
+      Estas listo para hacer tu pedido!
+    </h2>
+    <h3 id="pedido" style="display: none">Elige lo que te gustaría pedir</h3>
+    <select id="comida" multiple style="display: none">
+      <option value="verdura" selected>Verdura</option>
+      <option value="papas" selected>Papas</option>
+      <option value="fruta">Fruta</option>
+    </select>
+
+    <select id="salsas" multiple style="display: none">
+      <option value="limon" selected>limon</option>
+      <option value="chile" selected>Chile</option>
+      <option value="chamoy">Chamoy</option>
+    </select>
+
+    <script>
+      function submitForm(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const casa = document.getElementById("casa").value;
+        const lugar = document.getElementById("lugar").value;
+
+        // validate username and password are not empty
+        if (!username || !password) {
+          alert("Please enter a username and password");
+          return;
+        }
+
+        // validate casa is a number
+        if (isNaN(casa)) {
+          alert("Please enter a valid number for Casa");
+          return;
+        }
+
+        // Desaparecer la forma una vez que picas submit
+        const submitForm = document.getElementById("login-form");
+        submitForm.style.display = "none";
+
+        // show welcome message and pedido section
+        const welcomeMsg = document.getElementById("welcome-msg");
+        welcomeMsg.style.display = "block";
+        const pedidoSection = document.getElementById("pedido");
+        pedidoSection.style.display = "block";
+
+        // show comida and salsas select boxes
+        const comidaSelect = document.getElementById("comida");
+        comidaSelect.style.display = "block";
+        const salsasSelect = document.getElementById("salsas");
+        salsasSelect.style.display = "block";
+      }
+    </script> -->
+
+    <!-- <h1>Login Form</h1>
+    <form action="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required /> <br /><br />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <br /><br />
+      <input type="submit" value="login" />
+    </form>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const username = document.querySelector("#username").value;
+        const password = document.querySelector("#password").value;
+        console.log(`Username: ${username}, Password: ${password}`);
+      });
+    </script> -->
+
+    <!-- <h1>Search Form</h1>
+    <form method="get" action="http://www.google.com/search">
+      <label for="q"> Search: </label>
+      <input type="text" id="q" name="q" required /> <br /><br />
+      <input type="submit" value="Search" />
+    </form> -->
+
+    <!-- <script>
+      // 1. Create a new XMLHttpRequest object
+      let xhr = new XMLHttpRequest();
+
+      // 2. Configure it: GET-request for the URL
+      xhr.open("GET", "https://api.chucknorris.io/jokes/random");
+
+      // 3. Send the reques over the network
+      xhr.send();
+
+      // 4. This will be called after the resonse is received
+      xhr.onload = function () {
+        if (xhr.status != 200) {
+          alert(`Error ${xhr.status}: ${xhr.statusText}`);
+        } else {
+          console.log(`Done ${xhr.response}`);
+        }
+      };
+
+      xhr.onerror = function () {
+        alert("Request failed");
+      };
+    </script> -->
+
+    <!-- <p id="response"></p>
+
+    <script>
+      let xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.chucknorris.io/jokes/random");
+      xhr.send();
+
+      xhr.onload = function () {
+        if (xhr.status != 200) {
+          alert(`Error ${xhr.status}: ${xhr.statusText}`);
+        } else {
+          const response = JSON.parse(xhr.response);
+          document.getElementById("response").textContent = response.value;
+        }
+      }; -->
+
+    <button id="button">Generate Response</button>
+    <p id="response"></p>
+
+    <script>
+      function generateResposne() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.chucknorris.io/jokes/random");
+        xhr.send();
+
+        xhr.onload = function () {
+          if (xhr.status != 200) {
+            alert(`Error ${xhr.status}: ${xhr.statusText}`);
+          } else {
+            const response = JSON.parse(xhr.response);
+            document.getElementById("response").textContent = response.value;
+          }
+        };
+      }
+
+      const button = document.getElementById("button");
+      button.addEventListener("click", generateResposne);
+    </script>
+  </body>
+</html>

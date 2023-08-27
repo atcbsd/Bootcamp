@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Seguimiento de gastos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+      form {
+        width: 400px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        text-align: left;
+        font-weight: bold;
+      }
+      input, select {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      button[type="submit"] {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ccc;
+      }
+      th {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Seguimiento de gastos</h1>
+    <form>
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" name="fecha">
+
+      <label for="Costo">Costo:</label>
+      <input type="number" id="Costo" name="Costo">
+
+      <label for="categoria">Categoría:</label>
+      <select id="categoria" name="categoria">
+        <option value="comida">Comida</option>
+        <option value="transporte">Transporte</option>
+        <option value="hogar">Hogar</option>
+        <option value="entretenimiento">Entretenimiento</option>
+        <option value="otros">Otros</option>
+      </select>
+
+      <button type="submit">Agregar gasto</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Cantidad</th>
+          <th>Categoría</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí se mostrarán los gastos ingresados -->
+      </tbody>
+    </table>
+    
+    <script>
+        const mysql = require('mysql2');
+
+// Crear conexión con la base de datos
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'usuario',
+  password: 'contraseña',
+  database: 'basededatos'
+});
+
+// Conectar a la base de datos
+connection.connect((error) => {
+  if (error) {
+    console.error('Error al conectar a la base de datos: ', error);
+    return;
+  }
+  console.log('Conexión exitosa a la base de datos');
+});
+
+// Consulta de ejemplo
+connection.query('SELECT * FROM gastos', (error, results) => {
+  if (error) {
+    console.error('Error al realizar la consulta: ', error);
+    return;
+  }
+  console.log('Resultados: ', results);
+});
+
+    </script>
+  </body>
+</html>
+

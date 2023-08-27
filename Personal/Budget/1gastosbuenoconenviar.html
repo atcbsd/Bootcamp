@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Gastos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            border: 1px solid #4c45a7;
+            background-color: #e450b8;
+            margin-bottom: 30px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 5px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        #expense-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #expense-list li {
+            border: 1px solid #b6d8e0;
+            margin-bottom: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list-item-details {
+            flex-basis: 70%;
+        }
+
+        .list-item-totals {
+            flex-basis: 30%;
+            text-align: right;
+        }
+
+        .list-item-totals hr {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos adicionales para centrado y colores */
+        .container {
+            display: flex;
+            justify-content: center;
+            background-color: #ddf7d6;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .expenses-container {
+            max-width: 800px;
+        }
+
+        .expense-form-container {
+            background-color: #e9a659;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .expense-list-container {
+            background-color: #8475a5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .total-container {
+            background-color: #d1e9a9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="expenses-container">
+            <h1>Relacion de Gastos</h1>
+
+            <div id="expense-details">
+                <label for="date">Fecha:</label>
+                <input type="date" id="date" required>
+                <label for="destination">Destino:</label>
+                <input type="text" id="destination" required>
+                <label for="visited-companies">Empresas Visitadas:</label>
+                <input type="text" id="visited-companies">
+                <label for="purpose">Motivo de Visita:</label>
+                <input type="text" id="purpose">
+                <label for="observations">Observaciones:</label>
+                <textarea id="observations"></textarea>
+            </div>
+
+            <div class="expense-form-container">
+                <form id="expense-form">
+                    <label for="expense">Descripcion Gasto:</label>
+                    <input type="text" id="expense" required>
+                    <label for="files">Archivos:</label>
+                    <input type="file" id="file1" name="file1">
+                    <input type="file" id="file2" name="file2">
+                    <label for="category">Categoría:</label>
+                    <select id="category">
+                        <option value="Alimentos">Alimentos</option>
+                        <option value="Gasolina">Gasolina</option>
+                        <option value="Hospedaje">Hospedaje</option>
+                        <option value="Peaje">Peaje</option>
+                        <option value="Renta Auto">Renta Auto</option>
+                        <option value="Taxi">Taxis</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Varios">Varios</option>
+                    </select>
+                    <label for="amount">Monto:</label>
+                    <input type="number" id="amount" step="0.01" required>
+                    <button type="submit">Agregar Gasto</button>
+                </form>
+            </div>
+
+            <h2>Gastos Cargados</h2>
+            <div class="expense-list-container">
+                <ul id="expense-list"></ul>
+            </div>
+
+            <div class="total-container">
+                <h2>Total por Categoría</h2>
+                <div id="category-total-container"></div>
+            </div>
+
+            <div class="total-container">
+                <h2>Total General</h2>
+                <div id="general-total-container"></div>
+            </div>
+
+            <div class="buttons-container">
+                <button id="save-button">Guardar</button>
+                <button id="send-button">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('#expense-form');
+            const expenseList = document.querySelector('#expense-list');
+            const categoryTotals = {};
+            let totalGeneral = 0;
+            const categoryTotalContainer = document.querySelector('#category-total-container');
+            const generalTotalContainer = document.querySelector('#general-total-container');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const expense = document.querySelector('#expense').value;
+                const file1 = document.querySelector('#file1').files[0];
+                const file2 = document.querySelector('#file2').files[0];
+                const category = document.querySelector('#category').value;
+                const amount = parseFloat(document.querySelector('#amount').value);
+
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-item');
+
+                const listItemDetails = document.createElement('div');
+                listItemDetails.classList.add('list-item-details');
+
+                const expenseTitle = document.createElement('h3');
+                expenseTitle.textContent = expense;
+                listItemDetails.appendChild(expenseTitle);
+
+                const expenseFiles = document.createElement('ul');
+                if (file1) {
+                    const fileItem1 = document.createElement('li');
+                    fileItem1.textContent = file1.name;
+                    expenseFiles.appendChild(fileItem1);
+                }
+                if (file2) {
+                    const fileItem2 = document.createElement('li');
+                    fileItem2.textContent = file2.name;
+                    expenseFiles.appendChild(fileItem2);
+                }
+                listItemDetails.appendChild(expenseFiles);
+
+                const expenseCategory = document.createElement('p');
+                expenseCategory.textContent = 'Categoría: ' + category;
+                listItemDetails.appendChild(expenseCategory);
+
+                const expenseAmount = document.createElement('p');
+                expenseAmount.textContent = 'Monto: $' + amount.toFixed(2);
+                listItemDetails.appendChild(expenseAmount);
+
+                const listItemTotals = document.createElement('div');
+                listItemTotals.classList.add('list-item-totals');
+
+                if (categoryTotals.hasOwnProperty(category)) {
+                    categoryTotals[category] += amount;
+                } else {
+                    categoryTotals[category] = amount;
+                }
+                totalGeneral += amount;
+
+                const categoryTotalText = 'Total por Categoría:';
+                const categoryTotalList = document.createElement('ul');
+                for (let cat in categoryTotals) {
+                    const categoryTotalItem = document.createElement('li');
+                    categoryTotalItem.textContent = cat + ': $' + categoryTotals[cat].toFixed(2);
+                    categoryTotalList.appendChild(categoryTotalItem);
+                }
+
+                categoryTotalContainer.innerHTML = '';
+                categoryTotalContainer.appendChild(document.createTextNode(categoryTotalText));
+                categoryTotalContainer.appendChild(categoryTotalList);
+
+                generalTotalContainer.textContent = 'Total General: $' + totalGeneral.toFixed(2);
+
+                listItem.appendChild(listItemDetails);
+                listItem.appendChild(listItemTotals);
+                expenseList.appendChild(listItem);
+
+                form.reset();
+            });
+
+            const saveButton = document.querySelector('#save-button');
+            saveButton.addEventListener('click', function() {
+                // Código JavaScript para guardar los datos de gastos
+                const expenseData = {
+                    expenses: [],
+                    categoryTotals: categoryTotals,
+                    totalGeneral: totalGeneral
+                };
+
+                const expenseItems = document.querySelectorAll('.list-item-details');
+                expenseItems.forEach(function(item) {
+                    const expense = item.querySelector('h3').textContent;
+                    const category = item.querySelector('p').textContent.replace('Categoría: ', '');
+                    const amount = parseFloat(item.querySelector('p:nth-child(3)').textContent.replace('Monto: $', ''));
+                    const files = [];
+
+                    const fileItems = item.querySelectorAll('ul li');
+                    fileItems.forEach(function(fileItem) {
+                        files.push(fileItem.textContent);
+                    });
+
+                    const expenseItem = {
+                        expense: expense,
+                        category: category,
+                        amount: amount,
+                        files: files
+                    };
+
+                    expenseData.expenses.push(expenseItem);
+                });
+
+                // Aquí puedes hacer lo que desees con los datos, como enviarlos a un servidor, guardarlos en una base de datos, etc.
+                console.log(expenseData);
+            });
+
+            const sendButton = document.querySelector('#send-button');
+            sendButton.addEventListener('click', function() {
+                // Código JavaScript para enviar los datos de gastos
+                const expenseData = {
+                    expenses: [],
+                    categoryTotals: categoryTotals,
+                    totalGeneral: totalGeneral
+                };
+
+                const expenseItems = document.querySelectorAll('.list-item-details');
+                expenseItems.forEach(function(item) {
+                    const expense = item.querySelector('h3').textContent;
+                    const category = item.querySelector('p').textContent.replace('Categoría: ', '');
+                    const amount = parseFloat(item.querySelector('p:nth-child(3)').textContent.replace('Monto: $', ''));
+                    const files = [];
+
+                    const fileItems = item.querySelectorAll('ul li');
+                    fileItems.forEach(function(fileItem) {
+                        files.push(fileItem.textContent);
+                    });
+
+                    const expenseItem = {
+                        expense: expense,
+                        category: category,
+                        amount: amount,
+                        files: files
+                    };
+
+                    expenseData.expenses.push(expenseItem);
+                });
+
+                // Aquí puedes hacer lo que desees con los datos, como enviarlos a través de una solicitud HTTP, mostrar un mensaje de confirmación, etc.
+                console.log(expenseData);
+                alert('Los datos se han enviado correctamente.');
+            });
+        });
+    </script>
+</body>
+</html>

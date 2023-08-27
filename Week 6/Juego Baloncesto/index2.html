@@ -1,0 +1,85 @@
+<!DOCTYPE html> 
+<html> <head> <title>Juego de Baloncesto</title> </head> <body> <canvas id="court" width="600" height="400"></canvas> <lienzo id="bola" ancho="400" altura="400"></lienzo>
+
+    <script>
+        // Define el contexto 2D para el canvas de la cancha
+        var courtCanvas = document.getElementById("court");
+        var courtCtx = courtCanvas.getContext("2d");
+    
+        // Dibujar la cancha
+        function drawCourt() {
+            // Dibujar el rectángulo exterior de la cancha
+            courtCtx.beginPath();
+            courtCtx.rect(50, 50, 500, 300);
+            courtCtx.stroke();
+    
+            // Dibujar el círculo central
+            courtCtx.beginPath();
+            courtCtx.arc(300, 200, 60, 0, 2 * Math.PI);
+            courtCtx.stroke();
+    
+            // Dibujar las líneas de tiro libre
+            courtCtx.beginPath();
+            courtCtx.moveTo(100, 50);
+            courtCtx.lineTo(100, 350);
+            courtCtx.stroke();
+    
+            courtCtx.beginPath();
+            courtCtx.moveTo(500, 50);
+            courtCtx.lineTo(500, 350);
+            courtCtx.stroke();
+    
+            // Dibujar las líneas de triples
+            courtCtx.beginPath();
+            courtCtx.moveTo(200, 50);
+            courtCtx.lineTo(200, 150);
+            courtCtx.stroke();
+    
+            courtCtx.beginPath();
+            courtCtx.moveTo(400, 50);
+            courtCtx.lineTo(400, 150);
+            courtCtx.stroke();
+    
+            courtCtx.beginPath();
+            courtCtx.moveTo(200, 350);
+            courtCtx.lineTo(200, 250);
+            courtCtx.stroke();
+    
+            courtCtx.beginPath();
+            courtCtx.moveTo(400, 350);
+            courtCtx.lineTo(400, 250);
+            courtCtx.stroke();
+    
+            // Dibujar el círculo de tiro libre
+            courtCtx.beginPath();
+            courtCtx.arc(100, 200, 15, 0, 2 * Math.PI);
+            courtCtx.stroke();
+    
+            courtCtx.beginPath();
+            courtCtx.arc(500, 200, 15, 0, 2 * Math.PI);
+            courtCtx.stroke();
+    
+            // Dibujar los rectángulos de los aros
+            courtCtx.beginPath();
+            courtCtx.rect(65, 165, 35, 70);
+            courtCtx.stroke();
+    
+            courtCtx.beginPath();
+            courtCtx.rect(500 - 65 - 35, 165, 35, 70);
+            courtCtx.stroke();
+    
+            // Dibujar los aros
+            courtCtx.beginPath();
+            courtCtx.arc(100, 200, 15, 0, 2 * Math.PI);
+            courtCtx.fill();
+    
+            courtCtx.beginPath();
+            courtCtx.arc(500, 200, 15, 0, 2 * Math.PI);
+            courtCtx.fill();
+        }
+    
+        // Iniciar el juego
+        function startGame() {
+            // Define el contexto 2D para el canvas de la pelota
+            var ballCanvas
+    

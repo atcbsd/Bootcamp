@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom Events</title>
+  </head>
+  <body>
+    <!-- <form>
+      <input type="button" name="test" value="Click me" onclick="inform()" />
+    </form>
+
+    <script>
+      function inform() {
+        alert("You clicked me");
+      }
+    </script> -->
+    <!-- 
+    <form>
+      <input id="button" type="button" name="test" value="Click me" />
+    </form>
+
+    <script>
+      document.getElementById("button").onclick = function () {
+        alert("Click!");
+      };
+    </script> -->
+
+    <!-- Excercise 1  -->
+
+    <!-- Create a structured HTML file, and add the code below in the body. In a JS
+    file, write a JavaScript function to add rows to a table. Use the code below
+    as a base -->
+    <!-- 
+    <table id="sampleTable" border="1">
+      <tr>
+        <td>Row1 cell1</td>
+        <td>Row1 cell2</td>
+      </tr>
+      <tr>
+        <td>Row2 cell1</td>
+        <td>Row2 cell2</td>
+      </tr>
+    </table>
+
+    <input type="button" onclick="insertRow()" value="Insert row" />
+
+    <script>
+      function insertRow() {
+        // add a reference to the table
+        let table = document.getElementById("sampleTable");
+
+        //crear una nueva fila
+        let newRow = table.insertRow();
+
+        //crear nuevas celdas para las columnas columnas
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+
+        // agregar texto a las nuevas celdas que creamos
+        cell1.innerHTML = "New row cell 1";
+        cell2.innerHTML = "New row cell 2";
+      }
+    </script> -->
+
+    <!-- II THIS KEYWORD -->
+    <!-- <button onclick="alert(this.innerHTML)">Click me</button> -->
+
+    <!-- III. AddEventListener(): Multiple Events On The Same Element
+The addEventListener event listens to DOM events that’s trigger and runs the callback function that you pass into it when the event happens.
+
+element.addEventListener(DOM events, callback function);
+
+The callback function has one argument which contains the details of the event that was triggered : the event object that we will see soon.
+
+The removeEventListener() method removes an event handler that has been attached with the addEventListener() method.
+
+Note: To remove event handlers, the function specified with the addEventListener() method must be an external function. -->
+    <!-- 
+    <button id="btn">Click me</button>
+    <button id="btn1">Hey Hey</button>
+
+    <script>
+      let x = document.getElementById("btn");
+      let y = document.getElementById("btn1");
+
+      y.addEventListener("click", RespondClick);
+      y.addEventListener("mouseover", RespondMouseOver);
+
+      x.addEventListener("click", RespondClick);
+      x.addEventListener("mouseover", RespondMouseOver);
+      x.addEventListener("mouseout", RespondMouseOut);
+
+      function RespondClick() {
+        alert("Button Clicked");
+      }
+
+      function RespondMouseOver() {
+        alert("My mouse is over the btn");
+      }
+
+      function RespondMouseOut() {
+        alert("My mouse is out of the btn");
+      }
+    </script> -->
+
+    <!-- Exercise 2
+    Add a few event listener to the button. The event listeners should change the style of the button -->
+
+    <!-- <button id="jsstyle">Style</button>
+    <script>
+      // get a reference to the button element
+      let button = document.getElementById("jsstyle");
+      // add a "click" event listener to change the text
+      button.addEventListener("click", function () {
+        if (this.textContent === "Style") {
+          this.textContent = "Clicked";
+        } else {
+          this.textContent = "Style";
+        }
+      });
+      // add a "mouseover" event listener to change the background color
+      button.addEventListener("mouseover", function () {
+        this.style.backgroundColor = "red";
+      });
+      // add a "mouseout" event listener to change the background color back
+      button.addEventListener("mouseout", function () {
+        this.style.backgroundColor = "";
+      });
+    </script> -->
+
+    <!-- Exercise 3
+Add a click event listener to the div
+
+Add a few event listeners to the button. With at least one click event. The event listeners should change the style of the button
+
+Check how the propagation works and try to prevent it -->
+
+    <!-- <div>
+      <button id="jsstyle">Style</button>
+    </div> -->
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="words-input">Enter words:</label>
+    <input type="text" id="words-input" />
+    <button onclick="checkWords()">Check words</button>
+    <p id="result"></p>
+    <script>
+      // revisar en el array los números pares
+      //   const numbers = [10, 11, 12, 15, 20];
+
+      //   numbers.forEach((num) => {
+      //     if (num % 2 === 0) {
+      //       console.log(num);
+      //     }
+      //   }); // respuesta 10, 12, 20
+
+      // Checar si alguna palabra empieza con la letra h
+      //   const words = ["wow", "hey", "bye"];
+
+      //   const hasWordStartingWidthH = words.some((word) => {
+      //     return word.startsWith("h");
+      //   });
+      //   console.log(hasWordStartingWidthH); // respuesta true
+
+      function checkWords() {
+        const wordsInput = document.getElementById("words-input");
+        const words = wordsInput.value.split(",").map((word) => word.trim());
+        const result = document.getElementById("result");
+        const hasWordStartingWithH = words.some((word) => {
+          return word.startsWith("h");
+        });
+        result.textContent = hasWordStartingWithH
+          ? "At least one word starts with 'h'"
+          : "No word starts with 'h'";
+      }
+
+      // revisar si todas las palabras del array empiezan con H
+      //   const words = ["hola", "hey", "hello"];
+
+      //   const allWordsStartWithH = words.every((word) => {
+      //     return word.startsWith("h");
+      //   });
+      //   console.log(allWordsStartWithH); //respuesta true
+
+      //   const number = "123";
+      //   const paddedNumber = number.padStart(5, "0");
+      //   console.log(paddedNumber); // la respuesta es 00123
+
+      //   const number = "123";
+      //   const paddedNumber = number.padStart(5, "45");
+      //   console.log(paddedNumber); // la respuesta es 45123
+
+      //   const text = "Hello";
+      //   const paddedText = text.padEnd(8, "!");
+      //   console.log(paddedText); // Respuesta Hello!!!
+
+      //   const text = "    Hello    ";
+      //   const trimText = text.trimStart();
+      //   const trimText2 = text.trimEnd();
+
+      //   console.log(trimText, trimText2); // quita todo el whitespace del principio y del final depende si pones end o start
+      //   let arr = ["blue", ["red", "yellow"], "green"];
+      //   let flattened = arr.flat();
+
+      //   console.log(flattened); // quita los nested arrays
+
+      //   let arr = ["blue", ["red", ["a", "b"], "yellow"], "green"];
+      //   let flattened = arr.flat(2);
+
+      //   console.log(flattened); // quita la cantidad de nested arrays que le digas
+
+      //   let arr = [
+      //     "blue",
+      //     [
+      //       "red",
+      //       [
+      //         "a",
+      //         ["yes", ["claro", ["hola", "adios"], "por supuesto"], "no"],
+      //         "b",
+      //       ],
+      //       "yellow",
+      //     ],
+      //     "green",
+      //   ];
+      //   let flattened = arr.flat(5);
+
+      //   console.log(flattened); // quita la cantidad de nested arrays que le digas en este caso 5 y queda: ['blue', 'red', 'a', 'yes', 'claro', 'hola', 'adios', 'por supuesto', 'no', 'b', 'yellow', 'green']
+
+      //   let num = 5;
+      //   let result = num % 2 === 0 ? "even" : "odd";
+      //   console.log(result); // output: "odd"
+
+      //   let word = "hello";
+      //   let variable = word === "" ? "undefined" : "defined";
+      //   console.log(variable);
+
+      //   let num = -7;
+      //   let result = num > 0 ? "positive" : num < 0 ? "negative" : "zero";
+      //   console.log(result); // negative es el resultado
+
+      let num = 6;
+      let result =
+        num % 2 === 0 && num % 3 === 0 ? "divisible" : "not divisible";
+      console.log(result); // estamos checando si el número es divisible entre 2 y 3
+    </script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    border: 1px solid #4c45a7;
+    background-color: #e450b8;
+    margin-bottom: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    margin-bottom: 20px;
+    
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 5px;
+}
+
+button[type="submit"] {
+    display: block;
+    margin: 10px auto;
+}
+
+#expense-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#expense-list li {
+    border: 1px solid #b6d8e0;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-item-details {
+    flex-basis: 70%;
+}
+
+.list-item-totals {
+    flex-basis: 30%;
+    text-align: right;
+}
+
+.list-item-totals hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Estilos adicionales para centrado y colores */
+.container {
+display: flex;
+justify-content: center;
+background-color: #ddf7d6;
+padding: 10px; /* Ajusta el valor de padding según sea necesario */
+border-radius: 10px;
+margin-top: 10px; /* Ajusta el valor de margin-top según sea necesario */
+border: 2px solid #000;
+padding: 20px;
+border-radius: 5px;
+}
+
+.expenses-container {
+    max-width: 800px;
+}
+
+.expense-form-container {
+    background-color: #e9a659;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.expense-list-container {
+    background-color: #8475a5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.total-container {
+    background-color: #a9dce9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}

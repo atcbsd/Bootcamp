@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>99 bottles of beer</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      img {
+        float: right;
+        width: 400px;
+        margin-right: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>
+        <img src="./botella.jpg" alt="botella" />
+      </div>
+      <h1>99 Bottles of Beer</h1>
+      <label for="startNumber">Enter a number:</label>
+      <input type="number" id="startNumber" />
+      <button onclick="generateSong()">Generate Song</button>
+      <p id="songLyrics"></p>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

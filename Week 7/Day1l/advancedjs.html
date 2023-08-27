@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        display: flex;
+        width: 300px;
+        height: 250px;
+        border: 15px solid rgb(230, 204, 247);
+        padding: 3px;
+        /* margin: 20px; */
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 5%;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #calcu {
+        background-color: rgb(210, 251, 225);
+        flex-direction: column;
+      }
+      input {
+        background-color: rgb(246, 217, 255);
+      }
+
+      #num1 {
+        width: 200px;
+        padding: 10px;
+      }
+      #num2 {
+        width: 200px;
+        padding: 10px;
+      }
+
+      button:hover {
+        background-color: rgb(111, 228, 136);
+      }
+
+      #answer {
+        font-size: large;
+        color: rgb(0, 0, 0);
+        font-weight: 600;
+      }
+      select {
+        align-self: center;
+        margin-left: 75px;
+        width: 60px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h3>The every () Method</h3>
+    <h3>The array.includes () Method</h3> -->
+    <!-- <p id="demo"></p>
+    <input type="text" id="yearInput" placeholder="Enter a year" />
+    <button onclick="checkYear()">Check Year</button>
+    <p id="output"></p> -->
+
+    <div id="calcu">
+      <input type="number" id="num1" placeholder="Num1" />
+
+      <label for="operator"></label>
+      <select name="operator" id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <input type="number" id="num2" placeholder="Num2" />
+      <button onclick="calculator()">Answer</button>
+      <p id="answer"></p>
+    </div>
+    <script>
+      // const ages = [32, 33, 16, 40];
+      // document.getElementById("demo").innerHTML = ages.every(checkAge);
+      // function checkAge(age) {
+      //   return age > 18;
+      // }
+
+      // const survey = [
+      //   { name: "Steve", answer: "Yes" },
+      //   { name: "Jessica", answer: "Yes" },
+      //   { name: "Peter", answer: "Yes" },
+      //   { name: "Elaine", answer: "No" },
+      // ];
+
+      // document.getElementById("demo").innerHTML = survey.every(isSameAnswer);
+      // // el cero es true el uno es false
+      // function isSameAnswer(el, index, arr) {
+      //   if (index === 0) {
+      //     return true;
+      //   } else {
+      //     return el.answer === arr[index - 1].answer;
+      //   }
+      // }
+      // let myarray = [1,2,3,4,5];
+      // var check = myarray.includes(2);
+      // console.log(check);
+
+      // aquí después de includes está buscando el valor 3 en a partir de la posición 2 del array
+      // let myarray = [1, 3, 5, 2, 4];
+      // let check = myarray.includes(3, 2);
+      // if (check == true) console.log("found");
+      // else {
+      //   console.log("not found");
+      // }
+
+      // function checkYear(year) {
+      //   if (year > 2000) {
+      //     document.getElementById("demo").innerHTML =
+      //       "You are in the 21st century";
+      //     console.log("You are in the 21st century");
+      //   } else {
+      //     document.getElementById("demo").innerHTML =
+      //       "You live in the Middle Age";
+      //     console.log("You live in the Middle Age");
+      //   }
+      // }
+
+      // checkYear(1985); // Output: You live in the middle age
+      // checkYear(2022); // Output: You are in the 21st century
+
+      // function checkYear() {
+      //   const year = document.getElementById("yearInput").value;
+      //   const message =
+      //     year > 2000
+      //       ? "You are in the 21st century"
+      //       : "You live in the Middle Age";
+      //   console.log(message);
+      //   document.getElementById("output").innerHTML = message;
+      // }
+
+      const calculator = () => {
+        let num1 = document.getElementById("num1").value;
+        let num2 = document.getElementById("num2").value;
+        let operator = document.getElementById("operator").value;
+        const result =
+          operator === "+"
+            ? parseInt(num1) + parseInt(num2)
+            : operator === "-"
+            ? num1 - num2
+            : operator === "*"
+            ? num1 * num2
+            : operator === "/"
+            ? num1 / num2
+            : "Invalid operator";
+        document.getElementById("answer").innerHTML = result;
+        // return result;
+      };
+
+      // console.log(calculator(5, 7, "+"));
+      // console.log(calculator(10, 3, "-"));
+      // console.log(calculator(4, 6, "*"));
+      // console.log(calculator(2, 4, "/"));
+    </script>
+  </body>
+</html>

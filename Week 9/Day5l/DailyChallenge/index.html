@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily</title>
+  </head>
+  <body>
+    <script>
+      // // SOLUTION A
+      // function formatDate(date) {
+      //   const year = date.getFullYear();
+      //   const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      //   const day = date.getDate().toString().padStart(2, "0");
+      //   const hour = date.getHours().toString().padStart(2, "0");
+      //   const minute = date.getMinutes().toString().padStart(2, "0");
+      //   const second = date.getSeconds().toString().padStart(2, "0");
+
+      //   return `${year}${month}${day}${hour}${minute}${second}`;
+      // }
+      // console.log(formatDate(new Date(2020, 6, 4, 8, 0, 0))); // Output: "20200704080000"
+
+      // console.log(formatDate(new Date(2019, 11, 31, 23, 59, 59))); // Output: "20191231235959"
+
+      // console.log(formatDate(new Date(2020, 6, 4))); // Output: "20200704000000"
+
+      // SOLUTION B
+      const formatDate = (date) =>
+        [
+          "getFullYear",
+          "getMonth",
+          "getDate",
+          "getHours",
+          "getMinutes",
+          "getSeconds",
+        ].map((s, i) => `${date[s]() + (i === 1)}`.padStart(2, "0")).join``;
+
+      console.log(formatDate(new Date(2020, 6, 4, 8, 0, 0))); // Output: "20200704080000"
+
+      console.log(formatDate(new Date(2019, 11, 31, 23, 59, 59))); // Output: "20191231235959"
+
+      console.log(formatDate(new Date(2020, 6, 4))); // Output: "20200704000000"
+
+      // The given solution implements a function called formatDate.
+      // This function takes a date object as input and returns a string formatted according to the
+      // specified pattern: "YYYYMMDDHHmmSS".
+
+      // Let's break down the solution step by step:
+
+      // The function formatDate is declared with a parameter named date, which represents the input date object.
+
+      // Inside the function, an array of method names is defined: ['getFullYear', 'getMonth', 'getDate', 'getHours', 'getMinutes', 'getSeconds']. These methods are available on JavaScript's Date object and are used to retrieve the corresponding values of the year, month, day, hour, minute, and second from the input date.
+      // The map method is called on the array of method names. This iterates over each method name and applies a
+      // mapping operation.
+
+      // In the mapping operation, the current method name is passed to the date object using square bracket
+      // notation to retrieve the corresponding value. The + operator is used to convert the value to a number.
+
+      // Additionally, for the month value (index 1), 1 is added to adjust it from zero-based to one-based.
+
+      // The obtained values are then converted to strings using template literals (backticks) and concatenated with
+      // the empty string ('') to ensure they are treated as strings.
+
+      // For each value, the padStart method is called with arguments of 2 (to ensure the string has a length of 2)
+      // and '0' (the character used for padding) to add leading zeros if necessary. This ensures that each value
+      // is represented by two digits.
+
+      // The resulting array of formatted values is joined into a single string using the join method with an
+      // empty string as the separator.
+    </script>
+  </body>
+</html>

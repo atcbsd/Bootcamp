@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Sigmar&display=swap" rel="stylesheet">
+    <title>Daily 9-4</title>
+    <style>
+        body {
+  background-image: linear-gradient(-45deg, #f7e6ff, #fbb6ff, #ed1414);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  font-family: 'Sigmar', cursive;
+  color: #8d0b94;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.gif-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+form, .gif-list {
+  background-color: #3ec5f2;
+  border-radius: 10px;
+  padding: 20px;
+  margin:5px;
+}
+
+input[type="text"] {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+button[type="submit"], .delete-all-btn {
+  background-color:#2e91b1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+  font-family: 'Bruno Ace SC', cursive;
+
+  
+}
+.delete-all-btn {
+  
+font-size: 1em;
+
+}
+
+button[type="submit"]:hover, .delete-all-btn:hover {
+  background-color: #ff4757;
+}
+
+.gif-list div {
+  /* display: inline-block; */
+
+  text-align: center;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+
+.gif-list img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin:20px;
+  height: 200px;
+  width: 300px;
+}
+
+.gif-list button {
+  display:block;
+  margin-top: 10px;
+ background-color:#2e91b1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+  font-family: 'Bruno Ace SC', cursive;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Instructions
+
+Use this Giphy API Random documentation. Use this API Key : hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My
+In the HTML file, add a form, containing an input and a button. This input is used to fetch gif depending on a specific category.
+In the JS file, create a program to fetch one random gif depending on the search of the user (ie. If the search is “sun”, append on the page one gif with a category of “sun”).
+The gif should be appended with a DELETE button next to it. Hint : to find the URL of the gif, look for the sub-object named “images” inside the data you receive from the API.
+Allow the user to delete a specific gif by clicking the DELETE button.
+Allow the user to remove all of the GIFs by clicking a DELETE ALL button. -->
+<form>
+  <label for="category-input">Enter a category:</label>
+  <input type="text" id="category-input" name="category">
+  <button type="submit">Fetch Gif</button>
+</form>
+<div class="gif-list"></div>
+<button class="delete-all-btn">Delete All</button>
+
+
+<script>
+const API_KEY = 'hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My';
+const form = document.querySelector('form');
+const input = document.querySelector('input');
+const gifList = document.querySelector('.gif-list');
+const deleteAllBtn = document.querySelector('.delete-all-btn');
+
+// Add event listener to form submit
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const category = input.value;
+  fetchGif(category);
+});
+
+// Function to fetch a random gif and append to page
+function fetchGif(category) {
+  const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}&tag=${category}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const gifUrl = data.data.images.original.url;
+      const gifImg = document.createElement('img');
+      gifImg.src = gifUrl;
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', () => {
+        gifList.removeChild(gifDiv);
+      });
+      const gifDiv = document.createElement('div');
+      gifDiv.appendChild(gifImg);
+      gifDiv.appendChild(deleteBtn);
+      gifList.appendChild(gifDiv);
+    });
+}
+
+// Add event listener to delete all button
+deleteAllBtn.addEventListener('click', () => {
+  gifList.innerHTML = '';
+});
+
+</script>
+        </script>
+</body>
+</html>

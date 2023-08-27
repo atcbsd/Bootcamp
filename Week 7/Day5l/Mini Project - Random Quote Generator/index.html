@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote Generator</title>
+    <style>
+      /* CSS Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body Style */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      /* Container Style */
+      #quote-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      /* Title Style */
+      #quote-container h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      /* Author Style */
+      #quote-container p {
+        font-size: 1.5rem;
+        font-style: italic;
+        margin-bottom: 20px;
+      }
+
+      /* Button Style */
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #3e8e41;
+      }
+
+      /* Form Style */
+      form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Form Input Style */
+      label {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+      }
+
+      /* Navigation Style */
+      #navigation {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Previous and Next Button Style */
+      #previous-quote,
+      #next-quote {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #previous-quote:hover,
+      #next-quote:hover {
+        background-color: #3e8e41;
+      }
+
+      /* Like Button Style */
+      #like {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #like:hover {
+        background-color: #e53935;
+      }
+
+      /* Filter Button Style */
+      #filter {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #filter:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <label for="quote-input">Quote:</label>
+      <input type="text" id="quote-input" />
+      <label for="author-input">Author:</label>
+      <input type="text" id="author-input" />
+      <button type="submit" id="add-quote">Add Quote</button>
+    </form>
+
+    <div id="quote-container">
+      <h2 id="quote"></h2>
+      <p id="author"></p>
+      <button id="new-quote">Generate Quote</button>
+      <button id="num-chars">Number of Characters (with spaces)</button>
+      <button id="num-chars-nospace">
+        Number of Characters (without spaces)
+      </button>
+      <button id="num-words">Number of Words</button>
+      <button id="like">Like</button>
+    </div>
+
+    <form>
+      <label for="author-filter">Filter by author:</label>
+      <input type="text" id="author-filter" />
+      <button type="submit" id="filter">Filter</button>
+    </form>
+
+    <div id="navigation">
+      <button id="previous-quote">Previous</button>
+      <button id="next-quote">Next</button>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

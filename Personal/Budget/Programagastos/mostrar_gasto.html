@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Gasto</title>
+    <style>
+        /* Estilos CSS aquí */
+    </style>
+</head>
+<body>
+    <h1>Detalles del Gasto</h1>
+
+    <div id="expense-details">
+        <p>Expense: <span id="expense"></span></p>
+        <p>File 1: <span id="file1"></span></p>
+        <p>File 2: <span id="file2"></span></p>
+        <p>Category: <span id="category"></span></p>
+        <p>Amount: <span id="amount"></span></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const queryParams = new URLSearchParams(window.location.search);
+
+            const expense = queryParams.get('expense');
+            const file1 = queryParams.get('file1');
+            const file2 = queryParams.get('file2');
+            const category = queryParams.get('category');
+            const amount = queryParams.get('amount');
+
+            document.querySelector('#expense').textContent = expense;
+            document.querySelector('#file1').textContent = file1;
+            document.querySelector('#file2').textContent = file2;
+            document.querySelector('#category').textContent = category;
+            document.querySelector('#amount').textContent = amount;
+        });
+    </script>
+</body>
+</html>

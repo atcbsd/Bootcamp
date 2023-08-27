@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Week 2</title>
+</head>
+<body>
+<!--DAY 1 Green Exercise (POSTGRES SQL JOINS)
+Create another table, called countries, with two fields : country_id and coutry_name. 
+It has no foreign key. It's a table to test the PostgreSQL Joins.
+
+Use INNER JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN, and FULL OUTER JOIN to join the table countries 
+with the table actors, depending on the comparaison of their primary key
+Look at the results, and analyse them to understand the difference between the types of 
+PostgreSQL Joins 
+
+
+-- Create the "countries" table
+
+CREATE TABLE countries (
+  country_id SERIAL PRIMARY KEY,
+  country_name VARCHAR(100)
+);
+
+-- Create the "actors" table
+
+CREATE TABLE actors (
+  actor_id SERIAL PRIMARY KEY,
+  actor_name VARCHAR(100),
+  country_id INT
+);
+
+
+-- Insert actors into the "actors" table
+
+INSERT INTO actors (actor_name, country_id)
+VALUES
+  ('Tom Hanks', 1),
+  ('Brad Pitt', 2),
+  ('Natalie Portman', 3);
+
+-- Insert countries into the "countries" table
+
+INSERT INTO countries (country_name)
+VALUES
+  ('USA'),
+  ('France'),
+  ('Israel');
+
+
+
+-- Perform the INNER JOIN
+
+SELECT *
+FROM countries
+INNER JOIN actors ON countries.country_id = actors.country_id;
+
+-- Perform the LEFT OUTER JOIN
+
+SELECT *
+FROM countries
+LEFT OUTER JOIN actors ON countries.country_id = actors.country_id;
+
+-- Perform the RIGHT OUTER JOIN
+
+SELECT *
+FROM countries
+RIGHT OUTER JOIN actors ON countries.country_id = actors.country_id;
+
+-- Perform the FULL OUTER JOIN
+
+SELECT *
+FROM countries
+FULL OUTER JOIN actors ON countries.country_id = actors.country_id;
+
+
+In the above example, we first create the "countries" table with two fields: "country_id" and "country_name". 
+Then, we create the "actors" table with fields "actor_id", "actor_name", and "country_id" 
+(assuming it already exists).
+
+Next, we perform the different types of joins:
+
+INNER JOIN: This join returns only the rows where the "country_id" exists in both the "countries" 
+and "actors" tables.
+LEFT OUTER JOIN: This join returns all the rows from the "countries" table and the matching rows from 
+the "actors" table based on the "country_id". If there is no match, NULL values are returned for 
+the "actors" table columns.
+RIGHT OUTER JOIN: This join returns all the rows from the "actors" table and the matching rows from 
+the "countries" table based on the "country_id". If there is no match, NULL values are returned for 
+the "countries" table columns.
+FULL OUTER JOIN: This join returns all the rows from both the "countries" and "actors" tables. If there 
+is no match, NULL values are returned for the respective table's columns.
+By analyzing the results of these joins, you can observe the differences between them based on the 
+matching and non-matching rows in the two tables.
+
+
+
+EXERCISE WEEK 12 DAY 2 XP
+🌟 Exercise 1: DVD Rental
+Instructions
+Get a list of all film languages.
+
+SELECT * from language;
+
+REDO (This is wrong)
+Get a list of all films joined with their languages – select the following details : film title, 
+description, and language name. Try your query with different joins:
+Get all films, even if they don’t have languages.
+Get all languages, even if there are no films in those languages.
+
+SELECT * from film LEFT JOIN language ON film. language_id=language. language_id;
+
+SELECT film.title, film.description, language.name from film 
+LEFT JOIN language ON film.language_id=language.language_id;
+
+SELECT film.title, film.description, language.name from film 
+INNER JOIN language ON film.language_id=language.language_id;
+
+SELECT film.title, film.description, language.name from film 
+RIGHT JOIN language ON film.language_id=language.language_id;
+
+
+
+
+Create a new table called new_film with the following columns : id, name. Add some new films to the table.
+
+CREATE TABLE new_film(
+id SERIAL PRIMARY KEY, name VARCHAR (100)
+)
+
+
+INSERT INTO new film (name)
+VALUES ('Titanic'), ('The Hobbit'), ('Little Miss Sunshine')
+
+
+SELECT * FROM new_film
+
+
+Create a new table called customer_review, which will contain film reviews that customers will make.
+Think about the DELETE constraint: if a film is deleted, its review should be automatically deleted.
+It should have the following columns:
+review_id – a primary key, non null, auto-increment.
+film_id – references the new_film table. The film that is being reviewed.
+language_id – references the language table. What language the review is in.
+title – the title of the review.
+score – the rating of the review (1-10).
+review_text – the text of the review. No limit on the length.
+last_update – when the review was last updated.
+
+
+CREATE TABLE customer_reviews (
+review_id SERIAL PRIMARY KEY NOT NULL,
+film_id INT NOT NULL,
+language_id INT NOT NULL,
+title VARCHAR(100) NOT NULL,
+score INT NOT NULL,
+review_text TEXT,
+last_update TIMESTAMP DEFAULT current_timestamp,
+
+CONSTRAINT fk_language_id FOREIGN KEY (language_id) REFERENCES language(language_id), 
+CONSTRAINT fk_film_id FOREIGN KEY (film_id) REFERENCES new_film (id) ON DELETE CASCADE,
+CONSTRAINT score_value CHECK (score > 0 AND score <= 10)
+)
+
+after ON DELETE CASCADE we could add ON UPDATE CASCADE
+
+
+CONSTRAINT fk_language_id FOREIGN KEY (language_id) REFERENCES language(language_id): 
+This constraint establishes a foreign key relationship on the language_id column, referencing the 
+language table's language_id column. It ensures that the language_id values in the customer_reviews 
+table must exist in the language table.
+
+CONSTRAINT fk_film_id FOREIGN KEY film_id REFERENCES new_film (id) ON DELETE CASCADE: This constraint 
+establishes a foreign key relationship on the film_id column, referencing the id column of the new_film 
+table. The ON DELETE CASCADE specifies that if a film is deleted from the new_film table, all corresponding 
+rows in the customer_reviews table will also be deleted.
+
+CONSTRAINT score_value CHECK (score > 0 AND score <= 10): This constraint ensures that the score value 
+in the customer_reviews table must be greater than 0 and less than or equal to 10.
+
+
+
+Add 2 movie reviews. Make sure you link them to valid objects in the other tables.
+
+
+INSERT INTO customer_reviews (film_id, language_id, title, score, review_text) VALUES
+(1, 1, 'Great movie', 10, 'The firs tmovie I saw when I was a kid'),
+(3,1, 'Not bad', 9, 'A bit long but great story') RETURNING *
+
+
+Delete a film that has a review from the new_film table, what happens to the customer_review table?
+
+SELECT * FROM new_film
+
+DELETE FROM new_film WHERE (name='Titanic') RETURNING *
+
+
+
+
+
+
+🌟 Exercise 2 : DVD Rental
+Instructions
+Use UPDATE to change the language of some films. Make sure that you use valid languages.
+
+
+UPDATE film SET language_id = '2' WHERE film_id < 10;
+    UPDATE film SET language_id = '3' WHERE film_id = 100;
+    UPDATE film SET language_id = '4' WHERE film_id > 104 AND film_id < 115;
+
+
+
+Which foreign keys (references) are defined for the customer table? How does this affect the way in which 
+we INSERT into the customer table?
+
+store_id and address_id are connected as references.
+The numbers are picked according to the reference ID's,
+so can be in random order depoending on the input
+
+
+We created a new table called customer_review. Drop this table. Is this an easy step, or does it need 
+extra checking?
+
+DROP TABLE customer_reviews;
+No extra step, because the dependecies are on a foreign key
+
+
+Find out how many rentals are still outstanding (ie. have not been returned to the store yet).
+
+select COUNT(*) from rental WHERE return_date IS NULL;
+
+
+Find the 30 most expensive movies which are outstanding (ie. have not been returned to the store yet)
+
+select rental.rental_id, film.title, film.rental_rate
+from (inventory join rental on inventory.inventory_id = rental.inventory_id)
+join film on film.film_id = inventory.film_id
+where return_date is null
+order by rental_rate desc
+limit 30
+
+
+
+Your friend is at the store, and decides to rent a movie. He knows he wants to see 4 movies, but he can’t 
+remember their names. Can you help him find which movies he wants to rent?
+
+The 1st film : The film is about a sumo wrestler, and one of the actors is Penelope Monroe.
+
+
+SELECT title FROM film
+JOIN film_actor ON film_actor.film_id=film.film_id
+WHERE fulltext @@ to_tsquery('sumo')
+AND actor_id = (SELECT actor_id FROM actor
+              WHERE first_name = 'Penelope'
+              AND last_name = 'Monroe');
+OR
+
+select film.title
+from (actor join film_actor on actor.actor_id = film_actor.actor_id)
+join film on film.film_id = film_actor.film_id
+where film.description like '%Sumo%' 
+and actor.first_name = 'Penelope' 
+and actor.last_name = 'Monroe'
+
+
+
+The 2nd film : A short documentary (less than 1 hour long), rated “R”.
+
+SELECT title FROM film
+JOIN film_category ON film.film_id = film_category.film_id
+WHERE category_id = 6
+AND length < 60
+AND rating = 'R';
+
+
+
+The 3rd film : A film that his friend Matthew Mahan rented. He paid over $4.00 for the rental, and he 
+returned it between the 28th of July and the 1st of August, 2005.
+
+
+SELECT film.title, customer.first_name, customer.last_name,
+payment.payment_id, payment.amount, return_date
+FROM rental JOIN customer
+ON rental.customer_id = customer.customer_id
+JOIN payment ON rental.rental_id = payment.rental_id
+JOIN inventory ON rental.inventory_id = inventory.inventory_id
+JOIN film ON inventory.film_id = film.film_id
+WHERE customer.first_name = 'Matthew'
+AND customer.last_name = 'Mahan'
+AND rental.return_date < '2005-08-01'
+AND rental.return_date > '2005-07-28'
+AND payment.amount > 4;
+OR
+
+SELECT film.title 
+FROM film
+ON film.film_id = inventory.film_id
+JOIN rental
+ON rental.inventory_id = inventory.inventory_id
+JOIN customer
+ON rental.customer_id = customer.customer_id
+WHERE first_name = 'Matthew'
+AND last_name = 'Mahan'
+AND rental_rate > 4
+AND rental.return_date BETWEEN '28/07/2005' AND '01/08/2005'
+
+The 4th film : His friend Matthew Mahan watched this film, as well. It had the word “boat” in the title 
+or description, and it looked like it was a very expensive DVD to replace.
+
+
+
+SELECT title, description, film.replacement_cost
+FROM rental JOIN customer ON rental.customer_id = customer.customer_id
+JOIN inventory ON rental.inventory_id = inventory.inventory_id
+JOIN film ON inventory.film_id = film.film_id
+WHERE customer.first_name = 'Matthew'
+AND customer.last_name = 'Mahan'
+AND lower(description) LIKE '%boat%' OR lower(title) LIKE '%boat%'
+ORDER BY replacement_cost DESC;
+OR
+
+SELECT film.title, film.description, film.replacement_cost
+FROM film
+JOIN inventory
+ON film.film_id = inventory.film_id
+JOIN rental
+ON rental.inventory_id = inventory.inventory_id
+JOIN customer
+ON rental.customer_id = customer.customer_id
+where customer.first_name = 'Matthew'
+and customer.last_name = 'Mahan'
+and film.title like '%Boat%' 
+or film.description like '%Boat%'
+order by film.replacement_cost desc
+limit 1
+
+
+
+
+
+
+
+
+
+
+Create a new table called customer_review, which will contain film reviews that customers will make.
+Think about the DELETE constraint: if a film is deleted, its review should be automatically deleted.
+It should have the following columns:
+review_id – a primary key, non null, auto-increment.
+film_id – references the new_film table. The film that is being reviewed.
+language_id – references the language table. What language the review is in.
+title – the title of the review.
+score – the rating of the review (1-10).
+review_text – the text of the review. No limit on the length.
+last_update – when the review was last updated.
+
+
+Let's break down the components of this statement:
+
+
+CREATE TABLE customer_reviews (
+This line initiates the creation of a table named "customer_reviews."
+
+
+review_id SERIAL PRIMARY KEY NOT NULL,
+This line creates a column named "review_id" that serves as the primary key of the table. 
+The "SERIAL" data type is used to automatically generate a unique identifier for each row. 
+"PRIMARY KEY" indicates that this column will uniquely identify each row in the table, and "NOT NULL" 
+specifies that the column must have a value for each row.
+
+
+film_id INT NOT NULL,
+This line creates a column named "film_id" with the integer data type. It is used to store the ID of 
+the film related to the review. "NOT NULL" ensures that a value is required for each row.
+
+
+language_id INT NOT NULL,
+This line creates a column named "language_id" with the integer data type. It is used to store the ID of 
+the language in which the review is written. "NOT NULL" ensures that a value is required for each row.
+
+
+title VARCHAR(100) NOT NULL,
+This line creates a column named "title" with the VARCHAR data type, which is used to store text data of 
+variable length. The maximum length for this column is set to 100 characters. "NOT NULL" specifies that a 
+value is required for each row.
+
+
+score INT NOT NULL,
+This line creates a column named "score" with the integer data type. It is used to store the rating 
+score given in the review. "NOT NULL" ensures that a value is required for each row.
+
+
+review_text TEXT,
+This line creates a column named "review_text" with the TEXT data type, which is used to store longer 
+text data. It is used to store the actual content of the review.
+
+
+last_update TIMESTAMP DEFAULT current_timestamp,
+This line creates a column named "last_update" with the TIMESTAMP data type. It is used to store the 
+timestamp of when the review was last updated. The "DEFAULT current_timestamp" specifies that if no value 
+is provided, the current timestamp will be automatically inserted.
+
+
+CONSTRAINT fk_language_id FOREIGN KEY (language_id) REFERENCES language(language_id), 
+This line creates a foreign key constraint named "fk_language_id" that references the "language" table and 
+its "language_id" column. It ensures that the "language_id" column in the "customer_reviews" table 
+references a valid entry in the "language" table.
+
+
+CONSTRAINT fk_film_id FOREIGN KEY film_id REFERENCES new_film (id) ON DELETE CASCADE,
+This line creates a foreign key constraint named "fk_film_id" that references the "new_film" table and 
+its "id" column. It ensures that the "film_id" column in the "customer_reviews" table references a 
+valid entry in the "new_film" table. The "ON DELETE CASCADE" specifies that if a film is deleted from 
+the "new_film" table, the corresponding reviews in the "customer_reviews" table will also be deleted.
+
+
+CONSTRAINT score_value CHECK (score > 0 AND score <= 10)
+This line creates a constraint named "score_value" that checks the values entered in the "score" column. 
+It ensures that the score value is greater than 0 and less than or equal to 10.
+
+Overall, this SQL statement creates a table named "customer_reviews" with columns 
+for review ID, film ID, language
+
+
+
+
+
+
+
+
+
+
+DAILY CHALLENGE WEEK 12 DAY 2
+Instructions
+You are going to practice tables relationships
+
+Part I
+
+Create 2 tables : Customer and Customer profile. They have a One to One relationship.
+
+A customer can have only one profile, and a profile belongs to only one customer
+The Customer table should have the columns : id, first_name, last_name NOT NULL
+The Customer profile table should have the columns : id, isLoggedIn DEFAULT false (a Boolean), customer_id 
+(a reference to the Customer table)
+
+Insert those customers
+
+John, Doe
+Jerome, Lalu
+Lea, Rive
+
+Insert those customer profiles, use subqueries
+
+John is loggedIn
+Jerome is not logged in
+
+Use the relevant types of Joins to display:
+
+The first_name of the LoggedIn customers
+All the customers first_name and isLoggedIn columns - even the customers those who don’t have a profile.
+The number of customers that are not LoggedIn
+
+
+Part II:
+
+Create a table named Book, with the columns : book_id SERIAL PRIMARY KEY, title NOT NULL, author NOT NULL
+
+Insert those books :
+Alice In Wonderland, Lewis Carroll
+Harry Potter, J.K Rowling
+To kill a mockingbird, Harper Lee
+
+Create a table named Student, with the columns : student_id SERIAL PRIMARY KEY, name NOT NULL UNIQUE, 
+age. Make sure that the age is never bigger than 15 (Find an SQL method);
+
+Insert those students:
+John, 12
+Lera, 11
+Patrick, 10
+Bob, 14
+
+Create a table named Library, with the columns :
+book_fk_id ON DELETE CASCADE ON UPDATE CASCADE
+student_id ON DELETE CASCADE ON UPDATE CASCADE
+borrowed_date
+This table, is a junction table for a Many to Many relationship with the Book and Student tables : 
+A student can borrow many books, and a book can be borrowed by many children
+book_fk_id is a Foreign Key representing the column book_id from the Book table
+student_fk_id is a Foreign Key representing the column student_id from the Student table
+The pair of Foreign Keys is the Primary Key of the Junction Table
+
+Add 4 records in the junction table, use subqueries.
+the student named John, borrowed the book Alice In Wonderland on the 15/02/2022
+the student named Bob, borrowed the book To kill a mockingbird on the 03/03/2021
+the student named Lera, borrowed the book Alice In Wonderland on the 23/05/2021
+the student named Bob, borrowed the book Harry Potter the on 12/08/2021
+
+Display the data
+Select all the columns from the junction table
+Select the name of the student and the title of the borrowed books
+Select the average age of the children, that borrowed the book Alice in Wonderland
+Delete a student from the Student table, what happened in the junction table ?
+
+
+
+Part I - Creating tables and inserting data:
+
+-- Create Customer table
+CREATE TABLE Customer (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL
+);
+
+-- Create Customer profile table
+CREATE TABLE Customer_profile (
+  id SERIAL PRIMARY KEY,
+  isLoggedIn BOOLEAN DEFAULT false,
+  customer_id INTEGER REFERENCES Customer(id)
+);
+
+-- Insert customers
+INSERT INTO Customer (first_name, last_name)
+VALUES ('John', 'Doe'), ('Jerome', 'Lalu'), ('Lea', 'Rive');
+
+-- Insert customer profiles using subqueries
+INSERT INTO Customer_profile (isLoggedIn, customer_id)
+VALUES (
+  (SELECT true FROM Customer WHERE first_name = 'John' AND last_name = 'Doe'),
+  (SELECT id FROM Customer WHERE first_name = 'John' AND last_name = 'Doe')
+), (
+  (SELECT false FROM Customer WHERE first_name = 'Jerome' AND last_name = 'Lalu'),
+  (SELECT id FROM Customer WHERE first_name = 'Jerome' AND last_name = 'Lalu')
+);
+
+
+Part I - Querying using relevant joins:
+
+-- Query 1: First name of LoggedIn customers
+SELECT c.first_name
+FROM Customer c
+JOIN Customer_profile cp ON c.id = cp.customer_id
+WHERE cp.isLoggedIn = true;
+
+-- Query 2: All customers' first_name and isLoggedIn columns (including those without a profile)
+SELECT c.first_name, cp.isLoggedIn
+FROM Customer c
+LEFT JOIN Customer_profile cp ON c.id = cp.customer_id;
+
+-- Query 3: Number of customers that are not LoggedIn
+SELECT COUNT(*) AS num_customers_not_loggedin
+FROM Customer c
+LEFT JOIN Customer_profile cp ON c.id = cp.customer_id
+WHERE cp.isLoggedIn = false;
+
+
+Part II - Creating tables and inserting data:
+
+-- Create Book table
+CREATE TABLE Book (
+  book_id SERIAL PRIMARY KEY,
+  title VARCHAR(100) NOT NULL,
+  author VARCHAR(100) NOT NULL
+);
+
+-- Insert books
+INSERT INTO Book (title, author)
+VALUES ('Alice In Wonderland', 'Lewis Carroll'), ('Harry Potter', 'J.K Rowling'), ('To kill a mockingbird', 'Harper Lee');
+
+-- Create Student table
+CREATE TABLE Student (
+  student_id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL UNIQUE,
+  age INTEGER CHECK (age <= 15)
+);
+
+-- Insert students
+INSERT INTO Student (name, age)
+VALUES ('John', 12), ('Lera', 11), ('Patrick', 10), ('Bob', 14);
+
+-- Create Library table
+CREATE TABLE Library (
+  book_fk_id INTEGER REFERENCES Book(book_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  student_fk_id INTEGER REFERENCES Student(student_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  borrowed_date DATE,
+  PRIMARY KEY (book_fk_id, student_fk_id)
+);
+
+-- Add records in the junction table using subqueries
+INSERT INTO Library (book_fk_id, student_fk_id, borrowed_date)
+VALUES (
+  (SELECT book_id FROM Book WHERE title = 'Alice In Wonderland'),
+  (SELECT student_id FROM Student WHERE name = 'John'),
+  '2022-02-15'
+), (
+  (SELECT book_id FROM Book WHERE title = 'To kill a mockingbird'),
+  (SELECT student_id FROM Student WHERE name = 'Bob'),
+  '2021-03-03'
+), (
+  (SELECT book_id FROM Book WHERE title = 'Alice In Wonderland'),
+  (SELECT student_id FROM Student WHERE name = 'Lera'),
+  '2021-05-23'
+), (
+  (SELECT book_id FROM Book WHERE title = 'Harry Potter'),
+  (SELECT student_id FROM Student WHERE name = 'Patrick'),
+  '2022-06-10'
+)
+
+
+
+
+Querying the data and deleting a student:
+
+-- Select all columns from the junction table
+SELECT *
+FROM Library;
+
+-- Select the name of the student and the title of the borrowed books
+SELECT s.name AS student_name, b.title AS book_title
+FROM Library l
+JOIN Student s ON l.student_fk_id = s.student_id
+JOIN Book b ON l.book_fk_id = b.book_id;
+
+-- Select the average age of the children who borrowed the book "Alice in Wonderland"
+SELECT AVG(s.age) AS average_age
+FROM Library l
+JOIN Student s ON l.student_fk_id = s.student_id
+JOIN Book b ON l.book_fk_id = b.book_id
+WHERE b.title = 'Alice In Wonderland';
+
+-- Delete a student from the Student table
+DELETE FROM Student
+WHERE name = 'John';
+
+
+
+
+
+(MAYO 30 2023 MARTES)
+EXPLANATION INNER JOIN, LEFT JOIN, RIGHT JOIN; FULL OUTER JOIN
+
+Create two tables:
+
+CREATE TABLE Customers (
+  CustomerID SERIAL PRIMARY KEY,
+  CustomerName VARCHAR(50),
+  ContactName VARCHAR(50),
+  Country VARCHAR(50)
+);
+
+CREATE TABLE Orders (
+  OrderID SERIAL PRIMARY KEY,
+  CustomerID INT,
+  OrderDate DATE,
+  TotalAmount DECIMAL(10, 2),
+  FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+-- Insert data into the tables
+
+INSERT INTO Customers (CustomerName, ContactName, Country)
+VALUES 
+  ('John Doe', 'John Smith', 'USA'),
+  ('Jane Smith', 'Jane Doe', 'UK'),
+  ('David Johnson', 'Michael Brown', 'Canada'),
+  ('Sarah Johnson', 'Laura White', 'USA');
+
+INSERT INTO Orders (CustomerID, OrderDate, TotalAmount)
+VALUES 
+  (1, '2023-01-01', 100.00),
+  (1, '2023-02-01', 200.00),
+  (2, '2023-02-15', 150.00),
+  (4, '2023-03-01', 300.00);
+
+-- Perform different types of joins
+
+-- INNER JOIN: Returns rows where there is a match in both tables.
+SELECT Customers.CustomerName, Orders.OrderDate, Orders.TotalAmount
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
+-- LEFT JOIN: Returns all rows from the left table and matching rows from the right table.
+SELECT Customers.CustomerName, Orders.OrderDate, Orders.TotalAmount
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
+-- RIGHT JOIN: Returns all rows from the right table and matching rows from the left table.
+SELECT Customers.CustomerName, Orders.OrderDate, Orders.TotalAmount
+FROM Customers
+RIGHT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
+-- FULL OUTER JOIN: Returns all rows when there is a match in either the left or right table.
+SELECT Customers.CustomerName, Orders.OrderDate, Orders.TotalAmount
+FROM Customers
+FULL OUTER JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
+
+
+OTROS EJEMPLOS:
+https://programacionymas.com/blog/como-funciona-inner-left-right-full-join
+
+
+
+
+
+
+
+
+EXERCISE XP WEEK 12 DAY 4 (JUNE 1 2023 THURSDAY)
+Notes
+You will be working with the same database from the exercises using hr.backup
+
+SETUP
+Download this database.
+Click on “View raw” to download it.
+Restore the database in pgadmin.
+
+
+To restore the database; follow these instructions
+
+Go to pgAdmin4, and navigate to Databases on the left panel.
+Right click > Create > Database.
+Type in the name of the new database : hr.backup, and click Save. Wait a few moments.
+Right click on hr.backup under Databases in the left panel.
+Click Restore.
+Next to Filename, you should see a button with 3 dots on it. Click the button.
+Find your file in the window (you may have to check Show hidden files and folders), and click the Select 
+button.
+
+
+If the instructions given above don’t work
+
+Create your database with pgAdmin or the terminal.
+Download this Github repository.
+Open the shell or terminal.
+cd to Desktop or where the database file is located.
+Input the following command: psql -d hr -f hr.sql or psql -d hr -f nameOfTheFile.extension
+
+
+Subqueries
+Write a query to find the first_name, last_name and salaries of the employees who have a higher salary 
+than the employee whose last_name is Bull.
+
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > (SELECT salary FROM employees WHERE last_name = 'Bull');
+
+
+Write a SQL subquery to find the first_name and last_name of the employees under a manager who works for a 
+department based in the United States. Hint : Write single-row and multiple-row subqueries
+
+SELECT first_name, last_name
+FROM employees
+WHERE manager_id IN (SELECT employee_id 
+FROM countries 
+WHERE department_id IN (SELECT department_id FROM departments WHERE country_name = 'United States'));
+
+
+Write a SQL subquery to find the first_name and last_name of the employees who are working as managers.
+
+SELECT first_name, last_name
+FROM employees
+WHERE employee_id IN (SELECT manager_id FROM employees);
+
+
+Write a SQL subquery to find the employee(s) first_name and last_name, which salary is greater than the 
+average salary of the employees.
+
+SELECT first_name, last_name
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+
+
+Write a SQL subquery to find the employee(s) first_name and last_name, which salary is equal to the minimum 
+salary of their job position.
+
+SELECT first_name, last_name
+FROM employees
+WHERE salary = (SELECT MIN(salary) FROM employees WHERE job_id = employees.job_id);
+
+
+Write a query to find the names (first_name, last_name) of the employees who are not supervisors.
+
+SELECT first_name, last_name
+FROM employees
+WHERE employee_id NOT IN (SELECT DISTINCT manager_id FROM employees);
+
+
+Write a SQL subquery to find the employee(s) ID, first name, last name and salary of all employees whose 
+salary is above the average salary for their departments.
+
+SELECT employee_id, first_name, last_name, salary
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees WHERE department_id = employees.department_id);
+
+
+Write a subquery to find the 5th maximum salary of all salaries.
+
+SELECT DISTINCT salary
+FROM employees e1
+WHERE 5 = (
+  SELECT COUNT(DISTINCT salary)
+  FROM employees e2
+  WHERE e2.salary >= e1.salary
+);
+
+
+Write a subquery to find the 4th minimum salary of all the salaries.
+
+SELECT DISTINCT salary
+FROM employees e1
+WHERE 4 = (
+  SELECT COUNT(DISTINCT salary)
+  FROM employees e2
+  WHERE e2.salary <= e1.salary
+);
+
+
+Write a query to list the department name and number, of all the departments in which there are no employees.
+
+SELECT d.department_name, d.department_id
+FROM departments d
+LEFT JOIN employees e ON d.department_id = e.department_id
+WHERE e.employee_id IS NULL;
+
+
+
+
+
+
+
+
+Joins
+Write a query to find the addresses (location_id, street_address, city, state_province, country_name) of 
+all the departments.
+
+SELECT department_name, department_id
+FROM departments
+WHERE department_id NOT IN (SELECT department_id FROM employees);
+
+
+Write a query to make a join with the employees and departments table to find the name of the employee, 
+including first_name and last name, department ID and name of departments.
+
+
+SELECT e.first_name, e.last_name, e.department_id, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+
+
+
+Write a SQL query to make a join with three tables: employees, departments and locations to find the name, 
+including first_name and last_name, jobs, department name and ID, of the employees working in London.
+
+SELECT e.first_name, e.last_name, e.job_id, d.department_name, d.department_id
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+JOIN locations l ON d.location_id = l.location_id
+WHERE l.city = 'London';
+
+
+
+Write a query to make a join with two tables to find the employee id, last_name as Employee along with 
+their manager_id and last name as Manager.
+
+SELECT e.employee_id, e.last_name AS "Employee", e.manager_id, m.last_name AS "Manager"
+FROM employees e
+JOIN employees m ON e.manager_id = m.employee_id;
+
+
+
+Write a query to make a join with two tables employees and departments, to get the employees working in 
+each department (retrieve the employees details, and the department name and number).
+
+SELECT e.*, d.department_name, d.department_id
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+
+
+
+Write a query to make a join to find the employees who worked in a department which ID is 90 
+(retrieve the employee ID, job title and number of days the employee worked).
+
+SELECT *
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE d.department_id = 90;
+
+
+
+Write a query to make a join with three tables, departments, employees, and locations to display the 
+department name, manager name, and city.
+
+SELECT d.department_name, CONCAT(e.first_name, ' ', e.last_name) AS manager_name, l.city
+FROM departments d
+JOIN employees e ON d.department_id = e.employee_id
+JOIN locations l ON d.location_id = l.location_id;
+
+
+
+Write a query to make a join with two tables, employees and jobs to display the job title and average 
+salary of the employees.
+
+SELECT j.job_title, AVG(e.salary) AS average_salary
+FROM employees e
+JOIN jobs j ON e.job_id = j.job_id
+GROUP BY j.job_title;
+
+
+
+Write a query to make a join with two tables, employees and departments to display department name, 
+first_name and last_name, hire date and salary for all the managers who achieved a working experience of 
+more than 15 years.
+
+SELECT d.department_name, e.first_name, e.last_name, e.hire_date, e.salary
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE e.job_id::text LIKE '%MANAGER%' AND EXTRACT(YEAR FROM AGE(CURRENT_DATE, e.hire_date)) > 15;
+
+
+
+String Function
+Write a query to update phone_number records. If the the substring ‘124’ was found in that column, 
+update the phone_number to ‘999’.
+
+UPDATE employees
+SET phone_number = '999'
+WHERE phone_number LIKE '%124%';
+
+
+
+Write a query to find the details of the employees who contain eight or more characters in their first name.
+
+SELECT *
+FROM employees
+WHERE LENGTH(first_name) >= 8;
+
+
+
+Write a query to join in uppercase, the first letter of the first_name, with the last_name, with 
+'@example.com‘ in the email column.
+
+  **Sample Output :**
+  EMAIL
+  --------------------
+
+  JDOE@example.com (where first_name is John, and last_name is Doe)
+
+
+
+SELECT CONCAT(UPPER(SUBSTRING(first_name, 1, 1)), LOWER(SUBSTRING(first_name, 2))) || '@example.com' AS "EMAIL"
+FROM employees;
+
+
+
+
+Write a query to get the employee id, email but discard the last three characters of the email.
+
+
+SELECT employee_id, SUBSTRING(email, 1, LENGTH(email) - 3) AS "EMAIL"
+FROM employees;
+
+
+Write a query to display the first word in the job title, if the job title contains more than one words.
+
+
+SELECT split_part(job_title, ' ', 1) AS first_word
+FROM jobs
+WHERE job_title LIKE '% %';
+
+
+
+
+Write a query that displays the first name and the length of the first name for all employees whose name 
+starts with the letters ‘A’, ‘J’ or ‘M’. Give each column an appropriate label. Sort the results by the 
+employees’ first names.
+
+SELECT first_name AS "First Name", LENGTH(first_name) AS "First Name Length"
+FROM employees
+WHERE first_name LIKE 'A%' OR first_name LIKE 'J%' OR first_name LIKE 'M%'
+ORDER BY first_name;
+
+
+
+Write a query to display the first name and salary for all employees. Display the salary with the $ symbol. 
+Label the column as SALARY.
+
+
+SELECT first_name, CONCAT('$', salary) AS "SALARY"
+FROM employees;
+
+
+
+
+
+
+  
+  DAILY CHALLENGE ITEMS AND ORDERS (WEEK 12 DAY 4)
+
+
+Daily Challenge : Items And Orders
+Create a table orders and a table items. You decide which fields should be in each table, but each item 
+should have a price.
+There is a relationship of one to many between the orders and the table items
+Create a function that returns the total price for a given order
+Bonus:
+Create a table users
+There is a relationship of one to many between the table user and the table orders
+Create a function that returns the total price for a given order of a given user
+    CREATE DATABASE supermarket;
+
+    CREATE TABLE items 
+    (
+        item_id SERIAL NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        price INT,
+        last_update TIMESTAMP,
+        PRIMARY KEY (item_id)
+    );
+
+    CREATE TABLE users 
+    (
+        user_id SERIAL NOT NULL,
+        first_name VARCHAR(255) NOT NULL,
+        last_name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        last_update TIMESTAMP,
+        PRIMARY KEY (user_id)
+    );
+
+    CREATE TABLE orders 
+    (
+        order_id INT NOT NULL,
+        user_id INT NOT NULL,
+        item_id INT NOT NULL,
+        quantity INT NOT NULL,
+        last_update TIMESTAMP,
+        CONSTRAINT fk_user_id
+        FOREIGN KEY (user_id)
+            REFERENCES users (user_id)
+            ON DELETE CASCADE,
+        CONSTRAINT fk_item_id
+        FOREIGN KEY (item_id)
+            REFERENCES items (item_id)
+            ON DELETE CASCADE
+    );
+
+    CREATE or REPLACE FUNCTION user_orders (ord INT, usr varchar(50)) 
+    RETURNS INT AS $totalprice$
+    BEGIN
+       RETURN(
+           SELECT price FROM orders 
+           INNER JOIN users ON users.user_id = orders.user_id
+           INNER JOIN items ON items.item_id = orders.item_id 
+           WHERE orders.order_id = ord AND users.last_name = usr
+       );
+    END;
+    $totalprice$ LANGUAGE plpgsql;
+
+    SELECT * FROM user_orders(5050, 'Clooney');
+
+
+-->
+</body>
+</html>

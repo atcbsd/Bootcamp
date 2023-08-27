@@ -1,0 +1,91 @@
+html {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-family: Arial, sans-serif;
+}
+
+body {
+background: linear-gradient(0deg, rgba(228,163,235,1) 0%, rgba(76,242,211,1) 100%);
+display: flex;
+background-size: 5000% 5000%;
+}
+
+.todo {
+    background-color:rgba(255, 255, 255, 0.63);
+    border-radius:.25em;
+    box-shadow:0 0 .25em rgba(0,0,0,.25);
+    height: 400px;
+    width: 600px;
+    left:50%;
+    padding:10vmin;
+    position: absolute;
+    text-align:center;
+    top:50%;
+    transform:translate(-50%, -50%);
+    margin-top: 30px;
+}
+
+h1 {
+text-align: center;
+font-family: 'Lucida Sans', Verdana, sans-serif;
+color: purple;
+}
+
+form {
+display: flex;
+justify-content: center;
+margin: 20px 0;
+}
+
+input[type="text"] {
+flex-grow: 1;
+margin-right: 10px;
+padding: 5px;
+font-size: 16px;
+height: 30px;
+}
+
+#addButton {
+    width: 100px;
+}
+
+button[type="button"] {
+padding: 5px 10px;
+background-color: #b582df;
+color: white;
+border: none;
+cursor: pointer;
+
+}
+
+button[type="button"]:hover {
+background-color: #5f3e8e;
+}
+
+.listTasks {
+margin: 20px;
+margin: 20px auto; 
+max-width: 600px; 
+padding: 20px; 
+background-color: rgba(255, 255, 255, 0.63);
+border-radius:.25em;
+box-shadow:0 0 .25em rgba(0,0,0,.25);
+}
+
+.task {
+display: flex;
+align-items: center;
+margin: 10px 0;
+}
+
+.task label {
+margin-left: 10px;
+font-size: 16px;
+}
+
+.task input[type="checkbox"] {
+margin-right: 10px;
+}  

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calculadora de rutas en Google Maps</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			#map {
+				height: 500px;
+				width: 100%;
+			}
+		</style>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeQ-0X1sTO_zypuJg_7Nll1aC5vhW2wNo&callback=initMap"></script>
+	</head>
+	
+	<body>
+		<h1>Calculadora de rutas en Google Maps</h1>
+		<p>Ingresa las direcciones que deseas calcular la ruta, separadas por comas:</p>
+		<textarea id="addresses" rows="4"></textarea>
+		<br>
+		<button onclick="calculateRoute()">Calcular ruta</button>
+	
+		<div id="map"></div>
+	
+		<script>
+			// Función para calcular la ruta
+			function calculateRoute() {
+				// Obtener las direcciones del textarea y separarlas por comas
+				const addresses = document.getElementById("addresses").value;
+				const addressList = addresses.split(",");
+	
+				// Crear un objeto DirectionsService
+				const directionsService = new google.maps.DirectionsService();
+	
+				// Crear un objeto DirectionsRenderer
+				const directionsRenderer = new google.maps.DirectionsRenderer();
+	
+				// Crear un objeto Map
+				const map = new google.maps.Map(document.getElementById("map"), {
+					zoom: 7,
+					center: { lat: 19.432608, lng: -99.133209 }
+				});
+	
+				// Asignar el objeto Map al objeto DirectionsRenderer
+				directionsRenderer.setMap(map);
+	
+				// Crear un objeto LatLngBounds para ajustar el mapa
+				const bounds = new google.maps.LatLngBounds();
+	
+				// Crear un array para almacenar las paradas
+				const waypoints = [];
+	
+				// Agregar cada dirección como parada
+				addressList.forEach(function(address, index) {
+					const request = {
+						query: address
+					};
+					directionsService.route(request, function(result, status) {
+						if (status == "OK") {
+							// Obtener la ubicación de la parada
+							const location = result.routes[0].legs[0].start_location;
+							// Agregar la parada al array
+							waypoints.push({
+								location: location,
+								stopover: true
+							});
+							// Ajustar el mapa para mostrar todas las paradas
+							bounds.extend(location);
+							map.fitBounds(bounds);
+							// Si se han agregado todas las paradas, calcular la ruta
+							if (waypoints.length == addressList.length) {
+								const request = {
+									origin: waypoints[0].location,
+									destination: waypoints[addressList.length-1].location,
+									waypoints: waypoints.slice(1, addressList.length-1),
+									optimizeWaypoints: true,
+									travelMode: google.maps.TravelMode.DRIVING
+								};
+								directionsService.route(request, function(result, status) {
+									if (status == "OK") {
+										// Mostrar la ruta en el mapa
+										directionsRenderer.setDirections(result);
+									} else {
+									});
+});
+}
+</script>
+
+</body>
+</html>

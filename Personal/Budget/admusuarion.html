@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Usuarios</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ebeec7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .admin-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="checkbox"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-top: 6px;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="date"]:focus {
+            outline: none;
+            border-color: #4c45a7;
+        }
+
+        button[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4c45a7;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3b3485;
+        }
+
+        .error-message {
+            margin-top: 10px;
+            color: red;
+        }
+
+        .success-message {
+            margin-top: 10px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Administración de Usuarios</h1>
+        <form id="user-form">
+            <label for="username">Nombre:</label>
+        <input type="text" id="username" name="username" required>
+            <label for="lastName">Apellido:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" required>
+            <label for="expiration-date">Fecha de Caducidad:</label>
+            <input type="date" id="expiration-date">
+            <label for="never-expire">No Caduca:</label>
+            <input type="checkbox" id="never-expire">
+            <button type="submit">Agregar Usuario</button>
+        </form>
+    </div>
+
+    <script>
+       <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userForm = document.querySelector('#user-form');
+
+            userForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Obtener los valores ingresados por el usuario
+                const firstName = document.querySelector('#firstName').value;
+                const lastName = document.querySelector('#lastName').value;
+                const username = document.querySelector('#username').value;
+                const password = document.querySelector('#password').value;
+                const expirationDate = document.querySelector('#expiration-date').value;
+                const neverExpire = document.querySelector('#never-expire').checked;
+
+                // Crear un objeto con los datos del usuario
+                const userData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    username: username,
+                    password: password,
+                    expirationDate: expirationDate,
+                    neverExpire: neverExpire
+                };
+
+                // Aquí puedes realizar las validaciones y verificaciones necesarias antes de enviar los datos al servidor
+
+                // Enviar los datos al servidor (puedes usar AJAX, Fetch, etc.)
+                // Aquí debes usar tu propia lógica para enviar los datos al servidor y guardarlos en la base de datos
+
+                // Ejemplo de envío utilizando Fetch API
+                fetch('guardar_usuario.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    // Aquí puedes realizar acciones adicionales después de guardar el usuario, como mostrar un mensaje de éxito, limpiar el formulario, etc.
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Manejar cualquier error de conexión o envío de datos al servidor
+                });
+            });
+        });
+    </script>
+</body>
+</html>

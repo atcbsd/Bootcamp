@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily</title>
+  </head>
+  <body>
+    <label for="input-text">Input text:</label>
+    <input type="text" id="input-text" />
+
+    <script>
+      const inputText = document.getElementById("input-text");
+      inputText.addEventListener("input", () => {
+        inputText.value = inputText.value.replace(/[^a-zA-Z]/g, "");
+      });
+    </script>
+  </body>
+</html>

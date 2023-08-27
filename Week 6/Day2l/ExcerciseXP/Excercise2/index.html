@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Excercise 2</title>
+    <style>
+     #screen {
+        display: none;
+      }
+      #container {
+        width: auto;
+        height: 650px;
+        position: relative;
+        background: rgb(247, 209, 255);
+      }
+      #animate {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="screen">
+    <p><button onclick="myMove()">Start</button>
+      <button onclick="stopMove()">Stop</button></p>
+    <!-- <p><button id="stop">Stop Me</button></p> -->
+
+    <div id="container">
+      <img src="pajaro.png" id="animate"></img>
+    </div>
+    <script src="./script.js"></script>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <html>
+        <head>
+            <style>
+            p {
+              background: yellow;
+              color: red;
+            }
+            </style>
+        </head>
+        <body>
+            <div id="container"></div>
+            <button id="clear">Clear Interval</button> -->
+
+
+            <!-- Parte I
+            En su archivo Javascript, usando setTimeout, llame a una función después de 2 segundos.
+            La función alertará "Hello World". -->
+
+            <!-- <script>
+                setTimeout(function() {
+  alert("Hello World");
+}, 2000); -->
+
+            <!-- </script> -->
+
+            <!-- Parte II
+            En su archivo Javascript, usando setTimeout, llame a una función después de 2 segundos.
+            La función agregará un nuevo párrafo <p>Hello World</p>al archivo <div id="container">.
+             -->
+
+             <!-- <script>
+                setTimeout(function() {
+  let container = document.getElementById("container");
+  let newParagraph = document.createElement("p");
+  newParagraph.textContent = "Hello World";
+  container.appendChild(newParagraph);
+}, 2000);
+
+             </script> -->
+
+            <!-- Parte III
+            En su archivo Javascript, usando setInterval, llame a una función cada 2 segundos.
+            La función agregará un nuevo párrafo <p>Hello World</p>al archivo <div id="container">.
+            El intervalo se borrará (es decir, clearInterval), cuando el usuario haga clic en el botón.
+            En lugar de hacer clic en el botón, el intervalo se borrará (es decir, clearInterval) tan pronto como haya 5 párrafos dentro del <div id="container">.
+             -->
+
+<!-- <script>
+    let intervalId = setInterval(function() {
+  let container = document.getElementById("container");
+  let newParagraph = document.createElement("p");
+  newParagraph.textContent = "Hello World";
+  container.appendChild(newParagraph);
+
+  if (container.getElementsByTagName("p").length === 5) {
+    clearInterval(intervalId);
+  }
+}, 2000);
+
+document.getElementById("clear").addEventListener("click", function()){
+    clearInterval(intervalId);
+    container.remove();
+});
+
+
+
+</script> -->
+
+
+
+
+<!-- Exercise 2 : Move The Box
+Instructions
+<!DOCTYPE html>
+    <html>
+    <head> -->
+
+
+
+        <head>
+            <style>
+            #container {
+              width: 400px;
+              height: 400px;
+              position: relative;
+              background: yellow;
+            }
+            #animate {
+              width: 50px;
+              height: 50px;
+              position: absolute;
+              background-color: red;
+            }
+            </style>
+
+
+            <!-- <p><button onclick="myMove()">Click Me</button></p>
+            <div id="container">
+                <img id="train" src="https://js.cx/clipart/train.gif">
+            </div> -->
+
+
+<!-- arreglar -->
+        <!-- <script>
+            function myMove() {
+let elem =
+let container = document.getElementById("container");
+let pos = 0;
+let id=setInterval(frame, 1);
+document.getElementById("animate");
+function frame() {
+I
+if (pos=== container.offsetWidth - elem.offsetWidth) {
+clearInterval(id);
+} else {
+pos++;
+elem.style.left = pos + 'px';
+        </script> -->
+
+        <!-- <script>
+            function myMove() {
+            let elem = document.getElementById("animate");
+            let container = document.getElementById("container");
+            let pos= 0;
+            let posY = 0;
+            let id=setInterval(frame, 1);
+
+            function frame() {
+            if (pos=== container.offsetWidth - elem.offsetWidth && posY === container.offsetHeight - elem.offsetHeight) {
+            clearInterval(id);
+            } else {
+            if (pos container.offsetWidth elem.offsetWidth) {
+            pos++;
+            }
+            if (posy<container.offsetHeight - elem.offsetHeight) {
+            posY++;
+            }
+            elem.style.left = pos + 'px';
+            elem.style.top = posY + 'px';
+        }
+    }
+}
+            </script> -->
+
+
+
+
+<!-- <p><button onclick="myMove()">Click Me</button></p>
+<div id="container">
+  <div id="animate"></div>
+</div> -->
+
+
+
+
+
+<!-- <script>
+  function myMove() {
+    let elem = document.getElementById("animate");
+    let container = document.getElementById("container");
+    let pos = 0;
+    let posY = 0;
+    let id = setInterval(frame, 1);
+    function frame() {
+      if (pos === container.offsetWidth - elem.offsetWidth && posY === container.offsetHeight - elem.offsetHeight) {
+        clearInterval(id);
+      } else {
+        if (pos < container.offsetWidth - elem.offsetWidth) {
+          pos++;
+        }
+        if (posY < container.offsetHeight - elem.offsetHeight) {
+          posY++;
+        }
+        elem.style.left = pos + 'px';
+        elem.style.top = posY + 'px';
+      }
+    }
+  }
+</script> -->
+
+
+ <!-- Copy the code above, to a structured HTML file.
+// In your Javascript file, use setInterval to move the <div id="animate"> to the right side of the <div id="container">, when the button is clicked on.
+// The <div id="animate"> should move 1px to the right every milisecond, until it reaches the end of the <div id="container">.
+// Hint : use clearInterval as soon as the box reaches the right end side of the container
+// Hint : check out the demonstration in the Course Noted named JS Functions -->
+
+<!-- <script>
+    function myMove () {
+    let elem = document.getElementById("animate");
+    let container = document.getElementById("container");
+    let pos= Math.floor(Math.random()* (container.offsetWidth - elem.offsetWidth));
+    let posY = Math.floor(Math.random()* (container.offsetHeight - elem.offsetHeight));
+    let dx = (Math.random()-0.5) * 2;   // Random horizontal direction
+    let dy= (Math.random()- 8.5) * 2; // Random vertical direction
+    
+    function frame() {
+    if (pos<= 0 || pos container.offsetWidth - elem.offsetWidth) {
+    dx = -dx; // Reverse horizontal direction if box hits container boundary
+    }
+    if (posY<= 0 || pos container.offsetHeight - elem.offsetHeight) {
+    dx = -dx; // Reverse horizontal direction if box hits container boundary
+    }
+    pos += dx;
+    posy +=dy;
+    elem.style.left = pos +'px';
+    elem.style.top= posY+'px';
+}
+    setInterval(frame, 10);
+    }
+     -->
+
+
+
+
+
+
+
+
+140322
+
+<p>
+  <button onclick="myMove()">Start</button>
+  <button onclick="stopMove()">Stop</button>
+</p>
+<div id="container">
+  <div id="animate"></div>
+</div>
+
+<script>
+  let intervalID;
+
+  function myMove() {
+    let elem = document.getElementById("animate");
+    let container = document.getElementById("container");
+    let pos = Math.floor(Math.random() * (container.offsetWidth - elem.offsetWidth));
+    let posY = Math.floor(Math.random() * (container.offsetHeight - elem.offsetHeight));
+    let dx = (Math.random() - 0.5) * 2; // Random horizontal direction
+    let dy = (Math.random() - 0.5) * 2; // Random vertical direction
+
+    function frame() {
+      if (pos <= 0 || pos >= container.offsetWidth - elem.offsetWidth) {
+        dx = -dx; // Reverse horizontal direction if box hits container boundary
+        elem.style.backgroundColor = getRandomColor();
+      }
+      if (posY <= 0 || posY >= container.offsetHeight - elem.offsetHeight) {
+        dy = -dy; // Reverse vertical direction if box hits container boundary
+        elem.style.backgroundColor = getRandomColor();
+      }
+      pos += dx;
+      posY += dy;
+      elem.style.left = pos + 'px';
+      elem.style.top = posY + 'px';
+    }
+    intervalID = setInterval(frame, 10);
+  }
+
+  function stopMove() {
+    clearInterval(intervalID);
+  }
+
+  function getRandomColor() {
+      let letters = '0123456789ABCDEF'; 
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+      }
+    return color;
+    }   
+
+// The getRandomColor() function generates a random color using hexadecimal characters.
+// First, the function initializes a string called letters that contains all the possible
+// hexadecimal digits.
+// Next, it initializes a string called color with a hash symbol (#), which is a standard 
+// prefix used for defining hexadecimal color codes in HTML and CSS.
+// Then, the function enters a loop that iterates 6 times, which is the number of digits 
+// needed for a valid hexadecimal color code.
+// Within the loop, the function generates a random integer between 0 and 15 using 
+// Math.random() and Math.floor(). This integer is used to select a random character 
+// from the letters string.
+// Finally, the selected character is appended to the color string, and the loop repeats 
+// until all 6 digits are generated.
+// The function then returns the resulting color string, which represents a random color 
+// in hexadecimal format.
+
+
+  // BONUS: ADD <img id="animate" src="rock.png"> instead of div or inside
+</script
+
+
+</body>
+</html>

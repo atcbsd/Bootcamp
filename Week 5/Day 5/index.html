@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <style>
+        /* Basic styling for the buttons */
+button {
+	background-color: #333;
+	color: #fff;
+	padding: 10px 20px;
+	margin: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #444;
+}
+    </style>
+</head>
+<body>
+    <h1>Drum Set Sampler</h1>
+	<div class="drum-set">
+		<button class="kick">Kick</button>
+		<button class="snare">Snare</button>
+		<button class="hi-hat">Hi-Hat</button>
+	</div>
+
+
+	<script>
+        // SOLUTION 1
+
+        // Array of drum sound file names
+const drumSounds = {
+	kick: 'kick.wav',
+	snare: 'snare.wav',
+	hiHat: 'hi-hat.wav'
+};
+
+// Add event listeners to each button
+const kickBtn = document.querySelector('.kick');
+kickBtn.addEventListener('click', () => {
+	const kickSound = new Audio(drumSounds.kick);
+	kickSound.play();
+});
+
+const snareBtn = document.querySelector('.snare');
+snareBtn.addEventListener('click', () => {
+	const snareSound = new Audio(drumSounds.snare);
+	snareSound.play();
+});
+
+const hiHatBtn = document.querySelector('.hi-hat');
+hiHatBtn.addEventListener('click', () => {
+	const hiHatSound = new Audio(drumSounds.hiHat);
+	hiHatSound.play();
+});
+
+// Add event listeners to trigger drum sounds on key press
+document.addEventListener('keydown', (event) => {
+if (event.code === 'KeyA') {
+const kickSound = new Audio(drumSounds.kick);
+kickSound.play();
+} else if (event.code === 'KeyS') {
+const snareSound = new Audio(drumSounds.snare);
+snareSound.play();
+} else if (event.code === 'KeyD') {
+const hiHatSound = new Audio(drumSounds.hiHat);
+hiHatSound.play();
+}
+});
+
+
+    </script> -->
+
+
+
+<script>
+    // SOLUTION 3 ADD KEYS BEST PRACTICE
+
+    // Array of drum sound file names
+const drumSounds = {
+kick: 'kick.wav',
+snare: 'snare.wav',
+hiHat: 'hi-hat.wav'
+};
+
+// Add event listeners to each button
+const kickBtn = document.querySelector('.kick');
+kickBtn.addEventListener('click', () => {
+playSound(drumSounds.kick);
+});
+
+const snareBtn = document.querySelector('.snare');
+snareBtn.addEventListener('click', () => {
+playSound(drumSounds.snare);
+});
+
+const hiHatBtn = document.querySelector('.hi-hat');
+hiHatBtn.addEventListener('click', () => {
+playSound(drumSounds.hiHat);
+});
+
+// Add event listeners to trigger drum sounds on key press
+document.addEventListener('keydown', (event) => {
+if (event.code === 'KeyA') {
+    playSound(drumSounds.kick);
+} else if (event.code === 'KeyS') {
+    playSound(drumSounds.snare);
+} else if (event.code === 'KeyD') {
+    playSound(drumSounds.hiHat);
+}
+});
+
+// Function to play a drum sound
+function playSound(sound) {
+const audio = new Audio(sound);
+audio.play();
+}
+
+</script>
+
+
+
+
+
+</body>
+</html>

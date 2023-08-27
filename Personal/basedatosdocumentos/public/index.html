@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aplicación de documentos</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Aplicación de documentos</h1>
+  
+  <h2>Cargar documento</h2>
+  <form id="document-form" action="/documents/upload" method="POST" enctype="multipart/form-data">
+    <input type="text" name="productName" placeholder="Nombre del producto" required>
+    <input type="file" name="files" multiple required>
+    <select name="category" required>
+      <option value="">Seleccionar categoría</option>
+      <option value="control_calidad">Control de calidad</option>
+      <option value="kosher">Kosher</option>
+      <option value="distintivo_h">Distintivo H</option>
+      <option value="haccp">HACCP</option>
+    </select>
+    <button type="submit">Cargar</button>
+  </form>
+  
+  <h2>Documentos clasificados</h2>
+  <ul id="document-list"></ul>
+  
+  <script src="main.js"></script>
+</body>
+</html>

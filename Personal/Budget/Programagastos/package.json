@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "expres": "^0.0.5",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.2.0",
+    "pg": "^8.11.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "programagastos",
+  "version": "1.0.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e6d7f4;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        text-align: center;
+        margin-top: 20px;
+        margin-left: 400px;
+        margin-right: 400px;
+        background-color: rgb(190, 217, 217);
+        padding: 30px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        padding: 5px;
+        width: 200px;
+        margin-bottom: 10px;
+      }
+
+      input[type="submit"] {
+        padding: 5px 15px;
+        background-color: #c19ce3;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      ul {
+        padding: 0;
+        list-style-type: none;
+      }
+
+      ul li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shopping List</h1>
+    <form action="/addItem" method="POST">
+      <label for="item">Item:</label>
+      <input type="text" id="item" name="item" required /> <br /><br />
+      <label for="amount">Amount:</label>
+      <input type="number" name="amount" id="amount" required /> <br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

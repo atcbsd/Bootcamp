@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script src="jsadvance.js"></script> -->
+    <!-- <p>Checa si todas las respuestas in the array son igualws </p> -->
+
+
+    <!-- <script>
+       function CheckYear(Year) {
+        if (year > 2000) {
+            console.log("You are in the 21st century");
+
+        } else {
+            console.log("You live in the middle Age");
+       } 
+    }
+
+       CheckYear(1985);
+       CheckYear(2022); -->
+
+       <!-- ejercicio 2 -->
+
+       <!-- <input type="text" id="yearInput" placeholder="Enter a year" />
+       <button onclick="checkYear()">Check Year</button>
+       <p id="output"></p>
+       
+       <script>
+       function checkYear() {
+           const year = document.getElementById("yearInput").value;
+           const message = year > 2000 ? "You are in the 21st century" : "You live in the Midle Ages";
+           document.getElementById("output").textContent = message;
+       }
+       </script> -->
+
+
+<!-- <script>
+    const calculator = (num1, num2, operator) => {
+    const result = operator === "+" num1 + num2 :
+    operator === "+" num1 + num2 :
+    operator === "-" num1 - num2 :
+    operator === "*" num1 * num2 :
+    "Invalid operator";
+    return result;
+    };
+
+    console.log(calculator(5, 7, "+")); // Output: 12
+    console.log(calculator(10, 3, "-")); // Output: 7
+    console.log(calculator(4, 6, "*")); // Output: 24
+    console.log(calculator(2, 4, "/")); // Output: "Invalid operator"
+    </script> -->
+    <!-- <!DOCTYPE html>
+    <>
+      <head>
+        <title>Calculator</title>
+      </head>
+      <>
+        <p id="result1"></p>
+        <p id="result2"></p>
+        <p id="result3"></p>
+        <p id="result4"></p>
+    
+        <script>
+          const calculator = (num1, num2, operator) => {
+            let result;
+            switch (operator) {
+              case "+":
+                result = num1 + num2;
+                break;
+              case "-":
+                result = num1 - num2;
+                break;
+              case "*":
+                result = num1 * num2;
+                break;
+              case "/":
+                result = "Invalid operator";
+                break;
+              default:
+                result = "Invalid operator";
+                break;
+            }
+            return result;
+          };
+    
+          document.getElementById("result1").textContent = calculator(5, 7, "+");
+          document.getElementById("result2").textContent = calculator(10, 3, "-");
+          document.getElementById("result3").textContent = calculator(4, 6, "*");
+          document.getElementById("result4").textContent = calculator(2, 4, "/");
+        </script>
+       -->
+
+
+
+      <!-- <script>
+        conts numbers =[10, 11, 12, 15, 20];
+        
+        number.forEach ((num) => {
+        if (num % 2 === 0) {
+          console.log(num);
+        }
+        });
+      </script> -->
+
+      <!-- Exercice 2 -->
+
+      <!-- <script>
+        const words =  ["wow", "hey", "bye"];
+
+        const hasWordStartingWithH = words.some((word) => {
+          return word.stratsWith("h");
+        });
+
+        console.log(hasWordStartingWithH);
+
+      </script> -->
+<!-- 
+
+      <label for="words-input">Enter words:</label>
+<input type="text" id="words-input">
+<button onclick="checkWords()">Check words</button>
+<p id="result"></p>
+<script>
+function checkWords() {
+  const wordsInput = document.getElementById("words-input");
+  const words = wordsInput.value.split(",").map((word) => word.trim());
+  const result = document.getElementById("result");
+  const hasWordStartingWithH = words.some((word) => {
+    return word.startsWith("h");
+  });
+  result.textContent = hasWordStartingWithH ? "At least one word starts with 'h'" : "No word starts with 'h'"; -->
+
+
+
+  <!-- <script>
+        const words =  ["hello", "hey", "hola"];
+
+        const allWordStartingWithH = words.some((word) => {
+          return word.stratsWith("h");
+        });
+
+        console.log(allWordStartingWithH);
+
+      </script> -->
+
+
+<!-- <script>
+  const number = "123";
+  const paddedNumber = number.padStart(5, "0");
+  
+  console.log(paddedNumber);
+</script> -->
+
+<!-- <script>
+  const number = "123";
+  const paddedNumber = number.padStart(5, "45");
+  
+  console.log(paddedNumber);
+</script> -->
+
+
+<!-- <script>
+  const text = "Hello";
+  const paddedText = text.padEnd(8, "!");
+  
+  console.log(paddedText);
+</script> -->
+
+<!-- <script>
+  const text = "Hello";
+  const trimmedText = text.trimStart();
+  
+  console.log(trimmedText);
+</script> -->
+
+<!-- <script>
+  let arr = ["blue", ["red", "yellow"], "green"]
+  let flattened = arr.flat();
+  console.log(flattened)
+</script> -->
+
+<!-- <script>
+  let arr = ["blue", ["red", ["a", "b"],"yellow"], "green"]
+  let flattened = arr.flat();
+  console.log(flattened)
+</script> -->
+
+<!-- <script>
+  let arr = ["blue", ["red", ["a", "b"],"yellow"], "green"]
+  let flattened = arr.flat(2);
+  console.log(flattened)
+</script> -->
+
+
+<!-- <script>
+  let arr = ["blue", ["red", ["a", ["foo", "bar"],"b"],"yellow"], "green"];
+  let flattened = arr.flat(4);
+  console.log(flattened)
+</script> -->
+
+<!-- <script>
+  let num = 5;
+  let result = num % 2 === 0 ? "even" : "odd";
+  console.log(result);
+</script> -->
+
+<!-- <script>
+  let x;
+  let result = typeof x !=="undefined" ? "defined" : "undefined";
+  console.log(result);
+</script> -->
+
+<!-- <script>
+  let num = -7;
+  let result = num > 0 ? "positive" : num <0 ? "negative" : "zero";
+  console.log(result);
+</script> -->
+
+<!-- <script>
+  let str = "";
+  let result = str === "" ? "empty" : "not empty"
+  console.log(result);
+</script> -->
+
+<!-- 
+<script>
+  let num = 6;
+  let result = num %2 === 0 && num %3 === 0 ? "divisible" : "not divisible"
+  console.log(result);
+</script> -->
+
+
+
+
+  </body>
+</html>

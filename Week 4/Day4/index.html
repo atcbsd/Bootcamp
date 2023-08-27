@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- <script src="functions.js"></script> -->
+    
+    <!-- <h1>Vacation Cost Calculator</h1>
+    <form onsubmit="calculateCost(event)">
+      <label for="hotelNights">Number of Hotel Nights:</label>
+      <input type="text" id="hotelNights" name="hotelNights" required>
+      <br>
+      <label for="carDays">Number of Car Rental Days:</label>
+      <input type="text" id="carDays" name="carDays" required>
+      <br>
+      <label for="destination">Destination:</label>
+      <select id="destination" name="destination" required>
+        <option value="">Select a destination</option>
+        <option value="London">London</option>
+        <option value="Paris">Paris</option>
+        <option value="Other">Other</option>
+      </select>
+      <br>
+      <button type="submit">Calculate Total Cost</button>
+    </form>
+    <div id="result"></div>
+
+<script>
+  function calculateCost(event) {
+    event.preventDefault();
+
+    const hotelNights = document.querySelector('#hotelNights').value;
+    const carDays = document.querySelector('#carDays').value;
+    const destination = document.querySelector('#destination').value;
+    const resultDiv = document.querySelector('#result');
+
+    if (!isOnlyNumbers(hotelNights) || !isOnlyNumbers(carDays)) {
+      resultDiv.innerHTML = 'Please enter only numbers for the number of hotel nights and car rental days.';
+      return;
+    }
+
+    if (destination === '') {
+      resultDiv.innerHTML = 'Please select a destination.';
+      return;
+    }
+
+    const carPrice = rentalCarCost(carDays);
+    const hotelPrice = hotelCost(hotelNights);
+    const planePrice = planeRideCost(destination);
+
+    const totalPrice = carPrice + hotelPrice + planePrice;
+
+    resultDiv.innerHTML = `The total cost of your vacation is $${totalPrice}.`;
+  }
+
+  function hotelCost(numberOfNights) {
+    const costPerNight = 140;
+    const totalPrice = Number(numberOfNights) * costPerNight;
+    return totalPrice;
+  }
+
+  function isOnlyNumbers(str) {
+    const regex = new RegExp(/^[0-9]*$/);
+    return regex.test(str);
+  }
+
+  function planeRideCost(destination) {
+    if (destination === 'London') return 183;
+    if (destination === 'Paris') return 220;
+    return 300;
+  }
+
+  function rentalCarCost(carDays) {
+    const dailyPrice = 40;
+    const numberOfDays = Number(carDays);
+
+    let discount = 0;
+    if (numberOfDays >= 10) discount = 0.05;
+
+    const totalPrice = dailyPrice * numberOfDays * (1 - discount);
+    return totalPrice;
+  }
+</script> -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST (DOM WEEK 5 DAY 5 DAILY CHALLENGE)</title>
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+button[type="button"] {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="button"]:hover {
+  background-color: #3E8E41;
+}
+
+.listTasks {
+  margin: 20px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.task label {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.task input[type="checkbox"] {
+  margin-right: 10px;
+}  
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+      <form>
+        <input type="text" id="newTask" placeholder="Add a new task">
+        <button type="button" id="addButton">Add</button>
+      </form>
+      <div class="listTasks"></div>
+
+  </body>
+</html>

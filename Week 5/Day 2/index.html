@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script src="script.js"></script>
+
+    <!-- <div id="container">Users:</div>
+<ul class="list">
+    <li>John</li>
+    <li>Pete</li>
+</ul>
+<ul class="list">
+    <li>David</li>
+    <li>Sarah</li>
+    <li>Dan</li>
+</ul>
+<script>
+    const container = document.getElementById("container")
+    console.log('container:', container)
+    document.querySelector(".list").children[1].textContent = "Richard"
+    const lists = document.querySelectorAll(".list")
+    lists.forEach(list => list.firstElementChild.textContent = "David")
+    lists[1].children[1].remove()
+    lists.forEach(list => list.classList.add("student_list"))
+    console.log(lists)
+    const firstUl = document.querySelector('ul.list.student_list')
+    firstUl.classList.add("university", "attendance")
+    console.log(firstUl)
+  </script> -->
+ -->
+
+
+<!-- 
+   2   -->
+
+<!-- 
+  <div>Users:</div>
+<ul>
+    <li>John</li>
+    <li>Pete</li>
+</ul>
+
+
+<script>
+  const div = document.querySelector("div")
+  console.log(div?.style)
+
+  const divBackground = getComputedStyle(div).backgroundColor
+  const users = document.querySelectorAll("li")
+  console.log("users:", users)
+  
+  if (divBackground === "rgb(173, 216, 230)") {
+    console.log("this is lightblue!")
+    console.log(`Hello ${users[0].textContent} and ${users[1].textContent} !`)
+  } 
+
+</script>
+
+<style>
+
+body {
+    font-size: 24px;
+}
+
+div {
+    background-color: lightblue;
+    padding: 2rem;
+}
+
+li:first-child {
+    display: none;
+}
+
+li:last-child {
+    border: 1px solid red
+}
+</style> -->
+
+
+
+
+<!-- Exercise 3 -->
+<!-- 
+<div id="navBar">
+    <ul>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">My Friends</a></li>
+        <li><a href="#">Messenger</a></li>
+        <li><a href="#">My Pics</a></li>
+    </ul>
+  </div>
+  
+  <script>
+    const navbar = document.getElementById("navBar");
+    console.log('navbar:', navbar)
+  
+    navbar?.setAttribute("id", "socialNetworkNavigation")
+  
+    // We are going to add a new <li> to the <ul>.
+    // First, create a new <li> tag (use the createElement method).
+    const li = document.createElement("li")
+    console.log("li:", li)
+  
+    // Create a new text node with "Logout" as its specified text.
+    const logout = document.createTextNode("Logout")
+    console.log("logout:", logout)
+  
+  
+    // Append the text node to the newly created list node (<li>).
+    li.appendChild(logout)
+    console.log("li:", li)
+  
+    // Finally, append this updated list node to the unordered list (<ul>), using the 
+    // appendChild method.
+    const ul = navbar?.firstElementChild
+    console.log("li:", li)
+    ul?.appendChild(li)
+  
+    // BONUS Use the firstElementChild and the LastElementChild properties to
+    // retrieve the first and the last <li> elements from their parents elements (<li>).
+    const firstLi = ul?.firstElementChild
+    const lastLi = ul?.lastElementChild
+  
+  
+    console.log("firstLi:", firstLi)
+    console.log("lastLi:", lastLi)
+  
+  
+    // Display the text of each link. (Hint: use the textContent property).
+    console.log("first li content")
+    console.log(firstLi?.textContent)
+    
+    console.log("second li content")
+    console.log(lastLi?.textContent)
+  </script>
+ -->
+
+
+
+
+<!-- <body>
+    <script>
+        const createTextNode = document.createTextNode("Hola mundo");
+        document.body.appendChild(textNode);
+      </script> 
+</body>
+  -->
+
+
+  <div class="list-books"></div>
+
+<script>
+  const allBooks = []
+
+  const book1 = {
+    title: "Harry Potter",
+    author: "J.K. Rowling",
+    image: "https://picsum.photos/200",
+    alreadyRead : false
+  }
+
+  const book2 = {
+    title: "Lord of the Rings",
+    author: "Tolkien",
+    image: "https://picsum.photos/200",
+    alreadyRead : true
+  }
+
+  allBooks.push(book1, book2)
+
+  console.log("allbooks: ", allBooks)
+
+  const table = document.createElement("table")
+  table.innerHTML = `
+  <thead>
+      <tr>
+        <th colspan="1">My book list</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="${book1.alreadyRead ? "is-read" : ""}">
+        <td>${book1.title} written by ${book1.author}</td>
+        <td><img src="${book1.image}"/></td>
+        <td>Already read: ${book1.alreadyRead}</td>
+      </tr>
+      <tr class="${book2.alreadyRead ? "is-read" : ""}">
+        <td>${book2.title} written by ${book2.author}</td>
+        <td><img src="${book2.image}"/></td>
+        <td>Already read: ${book2.alreadyRead}</td>
+      </tr>
+    </tbody> 
+  `
+
+  const bookListDiv = document.querySelector(".list-books")
+  console.log("bookListDiv:", bookListDiv)
+  bookListDiv?.appendChild(table)
+
+  console.log(table)
+</script>
+
+
+<style>
+    img {
+        width: 100px;
+    }
+
+    .is-read {
+        color: red;
+    }
+</style>
+
+
+</body>
+</html>

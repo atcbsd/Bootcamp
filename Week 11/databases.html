@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Exercises</title>
+</head>
+<body>
+    <!-- DAILY CHALLENGE WEEK 9, DAY 5 (Mini Project). DATES 
+
+        Instructions :
+Create a function that takes a date object and return string in the following format: YYYYMMDDHHmmSS.
+
+The format should contain a 4 digit year, 2 digit month, 2 digit day, 2 digit hour(00-23), 2 digit minute 
+and 2 digit second.
+If any of the value has only single digit, you must use zero prefix, so that the result string length is 
+always the same.
+
+Examples
+
+formatDate(new Date(2020, 6, 4, 8, 0, 0)) ➞ "20200704080000"
+
+formatDate(new Date(2019, 11, 31, 23, 59, 59)) ➞ "20191231235959"
+
+formatDate(new Date(2020, 6, 4)) ➞ "20200704000000"
+
+
+Notes
+Assume Date year input will always be greater than 1970.
+
+Try not to rely on the default Date.toString() output in your implementation.
+
+Be aware that the Date's month field is zero based (0 is January and 11 is December).
+    
+
+SOLUTION:
+
+const formatDate = date => [
+    'getFullYear',
+    'getMonth',
+    'getDate',
+    'getHours',
+    'getMinutes',
+    'getSeconds'
+].map((s, i) => `${date[s]() + (i === 1)}`.padStart(2, '0')).join``;
+
+formatDate(new Date(2020, 6, 4, 8, 0, 0))
+
+
+
+
+
+The given solution implements a function called formatDate. 
+This function takes a date object as input and returns a string formatted according to the 
+specified pattern: "YYYYMMDDHHmmSS".
+
+Let's break down the solution step by step:
+
+The function formatDate is declared with a parameter named date, which represents the input date object.
+
+Inside the function, an array of method names is defined: ['getFullYear', 'getMonth', 'getDate', 'getHours', 'getMinutes', 'getSeconds']. These methods are available on JavaScript's Date object and are used to retrieve the corresponding values of the year, month, day, hour, minute, and second from the input date.
+The map method is called on the array of method names. This iterates over each method name and applies a 
+mapping operation.
+
+In the mapping operation, the current method name is passed to the date object using square bracket 
+notation to retrieve the corresponding value. The + operator is used to convert the value to a number. 
+
+Additionally, for the month value (index 1), 1 is added to adjust it from zero-based to one-based.
+
+The obtained values are then converted to strings using template literals (backticks) and concatenated with 
+the empty string ('') to ensure they are treated as strings.
+
+For each value, the padStart method is called with arguments of 2 (to ensure the string has a length of 2) 
+and '0' (the character used for padding) to add leading zeros if necessary. This ensures that each value 
+is represented by two digits.
+
+The resulting array of formatted values is joined into a single string using the join method with an 
+empty string as the separator.
+
+The final formatted string is returned from the formatDate function.
+To test the solution, the provided example is executed:
+
+javascript
+
+formatDate(new Date(2020, 6, 4, 8, 0, 0))
+The expected output is "20200704080000". This represents the date "2020-07-04 08:00:00" in the specified 
+format.
+    -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    <!-- Exercise WEEK 11 DAY 2 : Daily Challenge : SQL Basics
+
+    Create a database for actors:
+
+    CREATE DATABASE actors
+
+    Create a table actors. 
+    Add the columns: id, last_name, first_name, birth_date. 
+
+    (The id has to be auto_incremented) 
+
+    SOLUTION:
+
+    Open pgadmin you can create a server or create a new database. 
+    Hover to databases and tehn go to schemas / tables
+    selecting tables select query tool and start creating.
+
+CREATE TABLE actors (
+        id SERIAL PRIMARY KEY,
+        first_name VARCHAR (50) NOT NULL,
+        last_name VARCHAR (50) NOT NULL,
+        birth_date DATE NOT NULL,
+        num_oscars VARCHAR (50) NOT NULL
+)
+
+Insert
+You have to reproduce exactly this table.
+
+INSERT INTO actors (first_name, last_name, birth_date, num_oscars) VALUES 
+('Johnny', 'Depp','1963-06-09', 0),  
+(Meryl', 'Streep', '1949-06-22', 3), 
+(Leonardo', 'DiCaprio', '1974-11-11', 1), 
+('Scarlett', 'Johansson', '1984-11-22', 0), 
+('Denzel', 'Washington', '1954-12-28', 2)
+
+
+INSERT INTO actors VALUES ('William', 'Shatner', '1955-04-25', 0), ('Dolly', 'Parton', '1959-11-29', 0)
+
+Fetch all the data of the table
+SELECT * FROM actors
+
+
+Daily Challenge : SQL Basics
+Using the table actors from the lesson,
+
+Count how many actors are in the table
+Try to add a new actor, with some blank fields. What happens ?
+
+SELECT count(*) FROM actors
+
+INSERT INTO actors(f_name, l_name, age, num_oscars) VALUES (NULL)
+
+
+
+
+
+🌟 Exercise 2 : Dvdrental Database (WEEK 11 DAY 4) 
+Instructions
+Setup
+We will install a new sample database on our PostgreSQL servers.
+Download this sample database file
+
+There is a single file called dvdrental.tar inside the zip. Extract it to your local directory.
+Tip : If you are using Mac, after extracting the zip file you will get a folder called dvdrental
+
+We will use the newly installed dvdrental database.
+
+Download DVD Rental Sample Database and unzip.
+Create an empty database "dvdrental"
+click right click on dvdrental hierarchy and select restore then add a new folder with the restore.sql
+to do this on format change from custom or tar to Directory, then instead of selecting the file
+we are selecting, select dvdrental folder as a whole.
+
+
+
+1.) In the dvdrental database write a query to select all the columns from the “customer” table.
+
+SELECT * FROM customer
+
+SELECT * FROM address
+
+
+2.) Write a query to display the names (first_name, last_name) using an alias named “full_name”.
+
+SELECT CONCAT(first_name, last_name) AS full_name FROM customer
+
+SELECT CONCAT_WS(' ', first_name, last_name) AS full_name FROM customer
+
+3.) Lets get all the dates that accounts were created. Write a query to select all the create_date from 
+the “customer” table (there should be no duplicates).
+
+SELECT DISTINCT create_date FROM customer
+
+4.) Write a query to get all the customer details from the customer table, it should be displayed in 
+descending order by their first name.
+
+SELECT * FROM customer ORDER BY first_name DESC
+
+5.) Write a query to get the film ID, title, description, year of release and rental rate in ascending order 
+according to their rental rate.
+
+SELECT film_id, title, description, release_year, rental_rate FROM film ORDER BY rental_rate ASC
+
+6.) Write a query to get the address, and the phone number of all customers living in the Texas district, 
+these details can be found in the “address” table.
+
+SELECT * FROM customer INNER JOIN address ON customer.addres_id=address.address_id WHERE (district='Texas')
+
+SELECT address, phone FROM customer INNER JOIN address ON customer.addres_id=address.address_id WHERE (district='Texas')
+
+
+This SQL statement is performing an INNER JOIN operation between the "customer" and "address" tables. 
+It combines rows from both tables based on a common column, which is "address_id" in both tables.
+Here's a breakdown of the statement:
+
+"SELECT address, phone": This specifies that we want to select the "address" and "phone" columns from the 
+resulting joined table.
+"FROM customer": This indicates that the "customer" table is the primary table from which we are selecting 
+data.
+"INNER JOIN address": This defines the INNER JOIN operation and specifies the "address" table as the 
+second table involved in the join.
+"ON customer.addres_id = address.address_id": This is the join condition, which states that the join 
+should be performed where the "address_id" column in the "customer" table is equal to the "address_id" 
+column in the "address" table.
+"WHERE (district='Texas')": This is a condition that filters the result set based on the value in the 
+"district" column from the "address" table. It only includes rows where the district is "Texas".
+By executing this SQL statement, the database will return a result set that includes the "address" and 
+"phone" columns from the joined "customer" and "address" tables. The result set will only include 
+rows where the district is "Texas". This query allows you to retrieve the address and phone number 
+of customers located in the "Texas" district.
+
+
+7.) Write a query to retrieve all movie details where the movie id is either 15 or 150.
+
+SELECT * FROM film WHERE (film_id=150 OR film_id=15)
+
+8.) Write a query which should check if your favorite movie exists in the database. Have your query get 
+the film ID, title, description, length and the rental rate, these details can be found in the “film” table.
+
+SELECT film_id, title, description, length, rental_rate FROM film WHERE (title='Breaking Home')
+
+9.) No luck finding your movie? Maybe you made a mistake spelling the name. Write a query to get the film 
+ID, title, description, length and the rental rate of all the movies starting with the two first letters 
+of your favorite movie.
+
+SELECT film_id, title, description, length rental_rate FROM film WHERE (title='Breaking Home')
+
+SELECT film_id, title, description, length rental_rate FROM film WHERE (title LIKE 'Br%')
+
+10.) Write a query which will find the 10 cheapest movies.
+
+SELECT * FROM film ORDER BY rental_rate ASC LIMIT 10
+
+11.) Not satisfied with the results. Write a query which will find the next 10 cheapest movies.
+Bonus: Try to not use LIMIT.
+    
+SELECT * FROM film ORDER BY rental_rate ASC FETCH FIRST 10 ROWS ONLY OFFSET 10
+
+Alternatively we could solve this by:
+
+SELECT * FROM film ORDER BY rental_rate ASC OFFSET 10 LIMIT 10
+
+12.) Write a query which will join the data in the customer table and the payment table. You want to get 
+the first name and last name from the curstomer table, as well as the amount and the date of every 
+payment made by a customer, ordered by their id (from 1 to…).
+
+SELECT * FROM customer INNER JOIN payment ON payment.customer_id=customer.customer_id ORDER BY payment.customer_id
+
+Change * to:
+
+payment.customer_id, first_name, last_name, amount, payment_date
+
+
+
+The given SQL statement is performing an INNER JOIN operation between two tables: "customer" and "payment." 
+It combines rows from both tables based on a common column, which is "customer_id" in both the "customer" 
+and "payment" tables.
+Here's a breakdown of the statement:
+
+"SELECT *": This specifies that we want to select all columns from the resulting joined table.
+"FROM customer": This indicates that the "customer" table is the primary table from which we are selecting 
+data.
+"INNER JOIN payment": This defines the INNER JOIN operation and specifies the "payment" table as the second 
+table involved in the join.
+"ON payment.customer_id=customer.customer_id": This is the join condition, which states that the join 
+should be performed where the "customer_id" column in the "payment" table is equal to the 
+"customer_id" column in the "customer" table.
+"ORDER BY payment.customer_id": This clause orders the result set in ascending order based on the 
+"customer_id" column in the "payment" table.
+By executing this SQL statement, the database will return a result set that includes all columns 
+from both the "customer" and "payment" tables, where the join condition is satisfied. The result set 
+will be ordered based on the "customer_id" column from the "payment" table. This means that the rows 
+will be sorted in ascending order based on the customer ID in the "payment" table.
+
+
+
+13.) You need to check your inventory. Write a query to get all the movies which are not in inventory.
+
+SELECT * FROM film LEFT JOIN inventory ON film.film_id=inventory.film_id WHERE inventory_id IS NULL
+
+14.) Write a query to find which city is in which country.
+
+SELECT * FROM city INNER JOIN country on city.country_id=country.country_id
+
+15.) Bonus You want to be able to see how your sellers have been doing? Write a query to get the customer’s 
+id, names (first and last), the amount and the date of payment ordered by the id of the staff member who 
+sold them the dvd.
+
+SELECT * FROM payment INNER JOIN customer ON customer.customer_id=payment.customer_id ORDER BY staff_id ASC
+
+
+Change * to: customer.customer_id, first_name, last_name, amount, payment_date, staff_id
+
+
+
+Extra:
+SELECT COUNT (*) FROM payment INNER JOIN customer ON customer.customer_id=payment.customer_id
+
+
+
+
+
+
+
+Daily Challenge : SQL Puzzle
+Last updated : AQUI NOS QUEDAMOS MARTES 23 MAYO 2023
+
+
+What You Will Learn :
+SQL Basics
+Table relationships
+
+
+Instructions
+In this puzzle you have to go through all the SQL queries and provide us the output of the requests 
+before executing them (ie. make an assumption).
+Then, execute them to make sure you were correct.
+
+
+
+Queries
+CREATE TABLE FirstTab (
+     id integer, 
+     name VARCHAR(10)
+)
+
+INSERT INTO FirstTab VALUES
+(5,'Pawan'),
+(6,'Sharlee'),
+(7,'Krish'),
+(NULL,'Avtaar')
+
+SELECT * FROM FirstTab
+
+CREATE TABLE SecondTab (
+    id integer 
+)
+
+INSERT INTO SecondTab VALUES
+(5),
+(NULL)
+
+
+SELECT * FROM SecondTab
+
+
+DATA
+Table1 – FirstTab
+ID  Name
+5   Pawan
+6   Sharlee
+7   Krish
+NULL    Avtaar
+
+
+Table2 – SecondTab
+ID
+5
+NULL
+
+
+Questions
+Q1. What will be the OUTPUT of the following statement?
+
+    SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab WHERE id IS NULL )
+
+
+Q2. What will be the OUTPUT of the following statement?
+
+    SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab WHERE id = 5 )
+
+
+Q3. What will be the OUTPUT of the following statement?
+
+    SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab )
+
+
+Q4. What will be the OUTPUT of the following statement?
+
+    SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab WHERE id IS NOT NULL )
+
+
+
+
+SOLUTIONS:
+
+Go to pgadmin and create a database called quiz.
+Open query tool in quiz.
+
+CREATE TABLE FirstTab (
+    id integer,
+    name VARCHAR (10)
+);
+
+INSERT INTO FirstTab VALUES
+(5, 'Pawan'),
+(6, 'Sharlee'),
+(7, 'Krish'),
+(NULL, 'Avtaar');
+
+SELECT * FROM FirstTab
+
+
+
+
+Secondly add;
+
+CREATE TABLE SecondTab (
+    id integer
+);
+
+INSERT INTO SecondTab VALUES
+(5),
+(NULL);
+
+SELECT * FROM SecondTab
+
+
+
+
+Q1: HOW MANY ENTRIES IN TAB1 THAT ARE NOT NULL?
+
+
+SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab WHERE id IS NULL )
+
+
+RESULT: 0 (NULL is something it is a marker or placeholder. 
+NULL is not technically VALUE it is the absence of a VALUE)
+It is not true or false it is just null so we cant compare.
+
+
+SQL statement is performing a count operation on the "FirstTab" table. It checks for the number of rows 
+that satisfy a specific condition.
+
+Here's a breakdown of the statement:
+
+"SELECT COUNT(*)": This specifies that we want to count the number of rows that meet the defined criteria.
+"FROM FirstTab AS ft": This indicates that we are selecting data from the "FirstTab" table and assigning 
+it the alias "ft" for easier reference in the query.
+"WHERE ft.id NOT IN (SELECT id FROM SecondTab WHERE id IS NULL)": This is the condition that determines 
+which rows will be included in the count. It specifies that we want to exclude rows where the "id" value 
+in the "FirstTab" table is present in the result of the subquery.
+The subquery "SELECT id FROM SecondTab WHERE id IS NULL" retrieves the "id" values from the "SecondTab" 
+table where the "id" is NULL.
+By executing this SQL statement, the database will return the count of rows in the "FirstTab" table that 
+have an "id" value not present in the "SecondTab" table where the "id" is NULL. In other words, it counts 
+the number of rows in "FirstTab" that do not have a corresponding NULL "id" value in the "SecondTab" table.
+
+
+
+
+Q2: Compare values that are not 5.
+
+SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab WHERE id = 5 )
+
+
+RESULT: 2
+Since we cant compare the null it is simply going to be 2.
+
+
+SQL statement is performing a count operation on the "FirstTab" table. It checks for the number of rows 
+that satisfy a specific condition.
+
+Here's a breakdown of the statement:
+
+"SELECT COUNT(*)": This specifies that we want to count the number of rows that meet the defined criteria.
+"FROM FirstTab AS ft": This indicates that we are selecting data from the "FirstTab" table and assigning it 
+the alias "ft" for easier reference in the query.
+"WHERE ft.id NOT IN (SELECT id FROM SecondTab WHERE id = 5)": This is the condition that determines which 
+rows will be included in the count. It specifies that we want to exclude rows where the "id" value in 
+the "FirstTab" table is present in the result of the subquery.
+The subquery "SELECT id FROM SecondTab WHERE id = 5" retrieves the "id" values from the "SecondTab" table 
+where the "id" is equal to 5.
+By executing this SQL statement, the database will return the count of rows in the "FirstTab" table that 
+have an "id" value not equal to 5 in the "SecondTab" table. In other words, it counts the number of rows 
+in "FirstTab" that do not have a corresponding "id" value of 5 in the "SecondTab" table.
+
+
+
+Q3: Compare first tab to second tab.
+
+    SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab )
+
+
+RESULT: 0 (Cant compare something to NULL)
+
+
+SQL statement is performing a count operation on the "FirstTab" table. It checks for the number of rows 
+that satisfy a specific condition.
+
+Here's a breakdown of the statement:
+
+"SELECT COUNT(*)": This specifies that we want to count the number of rows that meet the defined criteria.
+"FROM FirstTab AS ft": This indicates that we are selecting data from the "FirstTab" table and assigning 
+it the alias "ft" for easier reference in the query.
+"WHERE ft.id NOT IN (SELECT id FROM SecondTab)": This is the condition that determines which rows will 
+be included in the count. It specifies that we want to exclude rows where the "id" value in the "FirstTab" 
+table is present in the result of the subquery.
+The subquery "SELECT id FROM SecondTab" retrieves the "id" values from the "SecondTab" table.
+By executing this SQL statement, the database will return the count of rows in the "FirstTab" table that 
+have an "id" value not present in the "SecondTab" table. In other words, it counts the number of rows in 
+"FirstTab" that do not have a corresponding "id" value in the "SecondTab" table.
+
+
+
+Q4: We want all the ids that are not going to be equal to 5. 
+
+SELECT COUNT(*) 
+    FROM FirstTab AS ft WHERE ft.id NOT IN ( SELECT id FROM SecondTab WHERE id IS NOT NULL )
+
+
+RESULT: 2 (Once again cant compare something to NULL)
+
+
+SQL statement is performing a count operation on the "FirstTab" table. It checks for the number of rows that satisfy a specific condition.
+
+Here's a breakdown of the statement:
+
+"SELECT COUNT(*)": This specifies that we want to count the number of rows that meet the defined criteria.
+"FROM FirstTab AS ft": This indicates that we are selecting data from the "FirstTab" table and assigning it 
+the alias "ft" for easier reference in the query.
+"WHERE ft.id NOT IN (SELECT id FROM SecondTab WHERE id IS NOT NULL)": This is the condition that determines 
+which rows will be included in the count. It specifies that we want to exclude rows where the "id" value 
+in the "FirstTab" table is present in the result of the subquery.
+The subquery "SELECT id FROM SecondTab WHERE id IS NOT NULL" retrieves the "id" values from the "SecondTab" 
+table where the "id" is not NULL.
+By executing this SQL statement, the database will return the count of rows in the "FirstTab" table that 
+have an "id" value not present in the "SecondTab" table where the "id" is not NULL. In other words, it 
+counts the number of rows in "FirstTab" that do not have a corresponding non-null "id" value in the 
+"SecondTab" table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MINI PROJECT WEEK 11 DAY 5
+
+EXERCISE XP:
+SETUP
+Download this database.
+Click on “View raw” to download it.
+Restore the database in pgadmin.
+
+
+To restore the database; follow these instructions
+
+Go to pgAdmin4, and navigate to Databases on the left panel.
+Right click > Create > Database.
+Type in the name of the new database : hr.backup, and click Save. Wait a few moments.
+Right click on hr.backup under Databases in the left panel.
+Click Restore.
+Next to Filename, you should see a button with 3 dots on it. Click the button.
+Find your file in the window (you may have to check Show hidden files and folders), and click the 
+Select button. (This time leave Custom or Tar instead of Directory)
+Afterwards go to schemas tables in the directory just created and open query tool.
+
+
+If the instructions given above don’t work
+
+Create your database with pgAdmin or the terminal.
+Download this Github repository.
+Open the shell or terminal.
+cd to Desktop or where the database file is located.
+Input the following command: psql -d hr -f hr.sql or psql -d hr -f nameOfTheFile.extension
+
+
+🌟 Basic Select Statement
+1.) Write a query to display the names (first_name, last_name) using an alias name “First”, “Last” from 
+the employee table.
+
+SELECT first_name, last_name FROM employees
+
+SELECT first_name AS "First", last_name AS "Last" FROM employees
+
+2.) Write a query to get unique departments ID from the employee table (ie. without duplicates).
+
+SELECT DISTINCT department_id FROM employees
+
+3.) Write a query to get the details of all employees from the employee table, do so in descending order by 
+first name.
+
+SELECT * FROM employees ORDER BY first_name DESC
+
+4.) Write a query to get the names (first_name, last_name), salary and 15% of salary as PF (ie. alias) for 
+all the employees.
+
+SELECT first_name, last_name, salary, salary*0.15 AS PF FROM employees ORDER BY first_name DESC
+
+SELECT first_name, last_name, salary, TRUNC(salary*0.15) AS PF FROM employees
+
+SELECT first_name, last_name, salary, ROUND(salary*0.15) AS PF FROM employees
+
+5.) Write a query to get the employee IDs, names (first_name, last_name) and salary in ascending order 
+according to their salary.
+
+SELECT employee_id, first_name, last_name, salary FROM employees ORDER BY salary ASC
+
+SELECT employee_id, first_name, last_name, ROUND(salary) FROM employees ORDER BY salary ASC
+
+6.) Write a query to get the total sum of all salaries paid to the employees.
+
+SELECT SUM(salary) FROM employees
+
+SELECT ROUND(SUM(salary)) FROM employees
+
+7.) Write a query to get the maximum and minimum salaries paid to the employees.
+
+SELECT MAX(salary), MIN(salary) FROM employees
+
+8.) Write a query to get the average salary paid to the employees.
+
+SELECT AVG(salary) FROM employees
+
+9.) Write a query to get the number of employees working in the company.
+
+SELECT COUNT(*) FROM employees
+
+10.) Write a query to get all the first names from the employees table in upper case.
+
+SELECT UPPER(first_name) FROM employees
+
+11.) Write a query to get the first three characters of each first name of all the employees in the employees 
+table.
+
+SELECT LEFT(first_name, 3) FROM employees
+
+12.) Write a query to get the full names of all the employees in the employees table. You have to include the 
+first name and last name.
+
+SELECT CONCAT(first_name, ' ', last_name) FROM employees
+
+13.) Write a query to get the first name, last name and the length of the full name of all the employees from 
+the employees table.
+
+SELECT first_name, last_name, LENGTH(CONCAT(first_name, ' ', last_name)) FROM employees
+
+14.) Write a query to check whether the first_name column of the employees table contains any numbers.
+
+SELECT first_name FROM employees WHERE first_name ~ '\d'
+
+SELECT first_name FROM employees WHERE first_name ~ '[0-9]'
+
+15.) Write a query to select the first ten records from a table.
+
+SELECT first_name FROM employees LIMIT 10
+
+
+
+🌟 Restricting And Sorting
+16.) Write a query to display the first_name, last_name and salary of all employees whose salary is between 
+$10,000 and $15,000.
+
+SELECT first_name, last_name, salary FROM employees 
+WHERE salary > 10000 AND salary < 15000
+
+SELECT first_name, last_name, ROUND(salary) FROM employees 
+WHERE salary > 10000 AND salary < 15000
+
+17.) Write a query to display the first_name, last_name and hire date of all employees who were hired in 1987.
+
+SELECT first_name, last_name, hire_date FROM employees
+WHERE hire_date BETWEEN '1987-01-01' AND '1987-12-31'
+
+18.) Write a query to get the all employees whose first_name has both the letters ‘c’ and ‘e’.
+
+SELECT first_name, last_name FROM employees
+WHERE first_name ILIKE '%e%c%' OR first_name ILIKE '%c%e%'
+
+19.) Write a query to display the last_name, job, and salary of all the employees who don’t work as Programmers 
+or Shipping Clerks, and who don’t receive a salary equal to $4,500, $10,000, or $15,000.
+
+
+SELECT * from employees
+LEFT JOIN jobs ON employees.job_id=jobs.job_id
+WHERE jobs.job_title='Programmer' OR jobs.job_title='Shipping Clerk'
+AND employees.salary!=4500
+AND employees.salary!=10000
+AND employees.salary/=15000
+
+20.) Write a query to display the last names of all employees whose last name contains exactly six characters.
+
+SELECT last_name from employees
+WHERE LENGTH (employees.last_name)=6
+
+21.) Write a query to display the last name of all employees who have the letter ‘e’ as the third character in 
+the name.
+
+SELECT last_name from employees
+WHERE POSITION ('e' IN last_name)=3
+
+22.) Write a query to display the jobs title appearing in the employees table.
+
+SELECT DISTINCT jobs.job_title from employees
+LEFT JOIN jobs on employees.job_id=jobs.job_id
+
+23.) Write a query to select all information of employees whose last name is either ‘JONES’ or ‘BLAKE’ or 
+‘SCOTT’ or ‘KING’ or ‘FORD’.
+
+SELECT * from employees
+WHERE last_name='Jones'
+OR last_name='Blake'
+OR last_name= 'Scott'
+OR last_name= 'King'
+OR last_name='Ford'
+
+
+
+SELECT * from employees WHERE last_name IN ('Jones', 'Blake', 'Scott', 'King', 'Ford')
+
+
+
+
+
+-->
+</body>
+</html>

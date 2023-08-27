@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily 9-2</title>
+</head>
+<body>
+    <!-- Create a form with two fields (name, last name) and a submit button.
+When you click the Send button, retrieve the data from the inputs, and append it on the DOM as a JSON string.
+The output should be: -->
+<h1> JSON FORM</h1>
+<form>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="lastName" >Last Name</label>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+    <input type="submit" value="send">
+</form>
+<script>
+// Get the form and input fields
+const form = document.querySelector('form');
+const nameInput = document. querySelector ('#name' );
+const lastNameInput = document.querySelector ('#lastName');
+// / Add an event listener to the form form.
+ addEventListener('submit', (event) => {
+event.preventDefault (); // Prevent the default form submission
+const data= { // Create an object with the user's data 
+name: nameInput. value,
+lastName: lastNameInput.value,
+};
+const jsonData = JSON.stringify (data); // Convert the data to a JSON string
+const output = document.createElement ('p'); // Create a new paragraph element
+output.textContent = jsonData; // Set the text content of the paragraph to the JSON string
+document.body.appendChild(output);// Apend the paragraph to the DOM
+});
+</script>
+
+</body>
+</html>
