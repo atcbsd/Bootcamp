@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Array Methods</title>
+  </head>
+  <body>
+    <!-- In summary, map() transforms each element of an array, filter() removes elements from an array based on 
+a condition, and reduce() transforms an array into a single value.
+
+
+    map(): The map() method is used to create a new array by transforming each element of an existing 
+    array based on a provided function. The original array is not modified. The map() method returns an 
+    array with the same length as the original array. For example, you can use map() to convert an array 
+    of numbers to an array of their squares.
+    
+    filter(): The filter() method is used to create a new array that contains only the elements of 
+    an existing array that meet a certain condition based on a provided function. The original array 
+    is not modified. The filter() method returns an array that can be shorter or the same length as 
+    the original array. For example, you can use filter() to remove all the odd numbers from an array.
+    
+    reduce(): The reduce() method is used to transform an array into a single value based on a provided 
+    function. The reduce() method takes an initial value and applies the provided function to the elements 
+    of the array in a cumulative way, reducing them to a single value. The original array is not modified. 
+    For example, you can use reduce() to calculate the sum of an array of numbers. -->
+
+    <script>
+      let almuerzos = [
+        { principal: "pasta", postre: "helado" },
+        { principal: "tacos", postre: "galletas" },
+        { principal: "pizza", postre: "flan" },
+        { principal: "sushi", postre: "pay de limon" },
+      ];
+
+      // USING MAP METHOD
+      // Usando esto nos saldría todo el array completo incluyendo postre.
+      // let platosPrincipales = almuerzos.map(function(almuerzo){
+      //   console.log(almuerzo);
+      // })
+
+      //MAP METHOD WITH RETURN
+
+      let platosPrincipales = almuerzos.map(function (almuerzo) {
+        return almuerzo.principal;
+      });
+
+      console.log(platosPrincipales);
+
+      console.log(almuerzos);
+
+      // Excercise 1
+
+      // Función de números que regresa un array nuevo con todos los números multiplicados por dos
+
+      function doubleNumbers(arr) {
+        return arr.map((num) => num * 2);
+      }
+
+      console.log(doubleNumbers([1, 2, 3, 4, 5])); // output [2, 4, 6, 8, 10]
+
+      // Excercise 2
+
+      // un array con strings y regresa un array con los strings en mayúsculas
+
+      function capitalizeStrings(arr) {
+        return arr.map((str) => str.toUpperCase());
+      }
+      console.log(capitalizeStrings(["hello", "world"])); //Output: ["HELLO", "WORLD"]
+
+      // Excercise 3
+
+      // un array de objetos que regrese un nuevo array unicamente con los valores de name usando map method
+
+      function getNames(arr) {
+        return arr.map((obj) => obj.name);
+      }
+
+      console.log(
+        getNames([{ name: "John" }, { name: "Sarah" }, { name: "Mike" }])
+      ); // Output; ['John', 'Sarah', 'Mike']
+
+      // Excercise 4
+
+      // función que toma un arrey de números y regresa un nuevo array con todos los impares multiplicados por 3
+
+      function multiplyOdds(arr) {
+        return arr.map((num) => (num % 2 !== 0 ? num * 3 : num));
+      }
+
+      console.log(multiplyOdds([1, 2, 3, 4, 5]));
+
+      // Excercise 5
+
+      // función arrayToString que toma un array de strings como un input y regresa un string con los elementos concatenados.
+
+      function arrayToString(arr) {
+        return arr.map((str) => str.trim()).join(" ");
+        return arr.map((str) => str).join(" ");
+      }
+
+      const input = [
+        "Hello",
+        "world",
+        "!",
+        "How",
+        "are",
+        "you",
+        "doing",
+        "today",
+        "?",
+      ];
+
+      const output = arrayToString(input);
+      console.log(output);
+    </script>
+  </body>
+</html>

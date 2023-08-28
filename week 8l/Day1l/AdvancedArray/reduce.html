@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reduce</title>
+  </head>
+  <body>
+    <script>
+      let almuerzos = [
+        { principal: "pasta", postre: "helado" },
+        { principal: "tacos", postre: "galletas" },
+        { principal: "pizza", postre: "flan" },
+        { principal: "sushi", postre: "pay de limon" },
+        { principal: "pasta", postre: "churros" },
+        { principal: "pasta", postre: "tiramisu" },
+      ];
+
+      //   let cantidadPastas = 0;
+
+      //   for (let i = 0; i < almuerzos.length; i++) {
+      //     if (almuerzos[i].principal === "pasta") {
+      //       cantidadPastas++;
+      //     }
+      //   }
+
+      //   console.log(cantidadPastas);
+
+      let cantidadPastas = almuerzos.reduce(function (contador, almuerzo) {
+        if (almuerzo.principal === "pasta") {
+          return contador + 1;
+        } else {
+          return contador;
+        }
+      }, 0);
+
+      console.log(cantidadPastas);
+
+      // Excersie 1:
+
+      // escribir una función que regrese la suma de todos los números en un array
+
+      function sumArray(arr) {
+        return arr.reduce((acc, num) => acc + num, 0);
+      }
+
+      console.log(sumArray([1, 2, 3, 4, 5]));
+      console.log(sumArray([-1, 0, 1]));
+      console.log(sumArray([10]));
+
+      // Excercise 2:
+
+      // función que regrese el producto en un array
+
+      function productArray(arr) {
+        return arr.reduce((acc, num) => acc * num, 1);
+      }
+
+      console.log(productArray([1, 2, 3, 4, 5]));
+      console.log(productArray([-1, 2, -3]));
+      console.log(productArray([0, 10, 20]));
+
+      // Exercise 3:
+
+      // Given an array of objects representing books, write a function that returns an array of authors who
+      // have written books that were published after the year 2000 and have sold more than 10,000 copies.
+      const books = [
+        {
+          title: "The Alchemist",
+          author: "Paulo Coelho",
+          year: 1988,
+          copiesSold: 65000000,
+        },
+        {
+          title: "The Hunger Games",
+          author: "Suzanne Collins",
+          year: 2008,
+          copiesSold: 35000000,
+        },
+        {
+          title: "Harry Potter and the Philosopher's Stone",
+          author: "J.K. Rowling",
+          year: 1997,
+          copiesSold: 120000000,
+        },
+        {
+          title: "The Da Vinci Code",
+          author: "Dan Brown",
+          year: 2003,
+          copiesSold: 80000000,
+        },
+        {
+          title: "The Girl with the Dragon Tattoo",
+          author: "Stieg Larsson",
+          year: 2005,
+          copiesSold: 30000000,
+        },
+      ];
+
+      let authorsPublished = books
+        .filter(function (book) {
+          return book.year >= 2000 && book.copiesSold >= 10000;
+        })
+        .map(function (book) {
+          return book.author;
+        });
+
+      console.log(authorsPublished);
+
+      function popularAuthors(books) {
+        return books
+          .filter((book) => book.year > 2000 && book.copiesSold > 10000)
+          .map((book) => book.author);
+      }
+
+      console.log(popularAuthors(books));
+
+      // SPREAD SYNTAX
+
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5, 6];
+      const arr3 = [...arr1, ...arr2];
+      console.log(arr3); // OUTPUT: [1, 2, 3, 4, 5, 6]
+    </script>
+  </body>
+</html>

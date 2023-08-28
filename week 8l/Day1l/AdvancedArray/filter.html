@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter</title>
+  </head>
+  <body>
+    <script>
+      let almuerzos = [
+        { principal: "pasta", postre: "helado" },
+        { principal: "tacos", postre: "galletas" },
+        { principal: "pizza", postre: "flan" },
+        { principal: "sushi", postre: "pay de limon" },
+        { principal: "pasta", postre: "churros" },
+        { principal: "pasta", postre: "tiramisu" },
+      ];
+
+      //   let postresParaPlatosConPasta = [];
+      //   for (let i = 0; i < almuerzos.length; i++) {
+      //     if (almuerzos[i].principal === "pasta") {
+      //       postresParaPlatosConPasta.push(almuerzos[i].postre);
+      //     }
+      //   }
+      //   console.log(postresParaPlatosConPasta);
+
+      // USING FILTER METHOD
+
+      //   let postresParaPlatosConPasta = almuerzos.filter(function (almuerzo) {
+      //     return almuerzo.principal === "pasta";
+      //   });
+
+      //   console.log(postresParaPlatosConPasta);
+
+      // USING FILTER AND MAP METHOD
+
+      let postresParaPlatosConPasta = almuerzos
+        .filter(function (almuerzo) {
+          return almuerzo.principal === "pasta";
+        })
+        .map(function (almuerzo) {
+          return almuerzo.postre;
+        });
+
+      console.log(postresParaPlatosConPasta);
+
+      // Excercise 1
+
+      // función filterEvens para de un array imprmir unicamente los números pares
+
+      //   function filterEvens(arr) {
+      //     return arr.filter((num) => num % 2 === 0);
+      //   }
+      //   const input = [1, 2, , 3, 4, 5, 6, 7, 8, 9, 10];
+      //   const output = filterEvens(input);
+      //   console.log(output);
+
+      // Excercise 2
+
+      // función filterByLength que filtre lo que contenga más de cierta cantidad de caracteres
+
+      //   function filterByLength(input, minLength) {
+      //     return input.filter((str) => str.length >= minLength);
+      //   }
+
+      //   const input = ["apple", "banana", "cherry", "date", "elderberry"];
+      //   const minLength = 6;
+      //   const output = filterByLength(input, minLength);
+      //   console.log(output);
+
+      // Excercise 3
+
+      // función filterByProperty filtrar para obtener los valores verdaderos
+
+      //   function filterByProperty(arr, propName) {
+      //     return arr.filter((obj) => obj[propName]);
+      //   }
+
+      //   const input = [
+      //     { name: "Alice", age: 30, hasChildren: true },
+      //     { name: "Bob", age: 25, hasChildren: false },
+      //     { name: "Charlie", age: 40, hasChildren: true },
+      //     { name: "David", age: 20, hasChildren: false },
+      //   ];
+      //   const propName = "hasChildren";
+      //   const output = filterByProperty(input, propName);
+      //   console.log(output); // [{ name: 'Alice', age: 30, hasChildren: true }, { name: 'Charlie', age: 40, hasChildren: true }]
+    </script>
+  </body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced objects</title>
+  </head>
+  <body>
+    <script>
+      //   // 1. Object.Keys()
+      //   const object1 = {
+      //     a: "somestring",
+      //     b: 42,
+      //     c: false,
+      //   };
+
+      //   console.log(Object.keys(object1));
+      //   // expected output: ["a", "b", "c"]
+
+      //   // 2. Object.Values()
+      //   const object2 = {
+      //     a: "somestring",
+      //     b: 42,
+      //     c: false,
+      //   };
+
+      //   console.log(Object.values(object2));
+      //   // expected output: ["somestring", 42, false]
+
+      //   // 3. Object.Entries()
+      //   const object3 = {
+      //     a: "somestring",
+      //     b: 42,
+      //     c: false,
+      //   };
+
+      //   console.log(Object.entries(object3));
+      //   // expected output:
+      //   // [ [ 'a', 'somestring' ], [ 'b', 42 ], [ 'c', false ] ]
+
+      //   let westeros = {
+      //     cersei: "Lannister",
+      //     arya: "Stark",
+      //     jon: "Snow",
+      //     brienne: "Tarth",
+      //     daenerys: "Targaryen",
+      //     theon: "Greyjoy",
+      //     jorah: "Mormont",
+      //     margaery: "Tyrell",
+      //     sandor: "Clegane",
+      //     samwell: "Tarly",
+      //     ramsay: "Bolton",
+      //   };
+
+      //   console.log(Object.keys(westeros));
+      //   console.log(Object.values(westeros));
+      //   console.log(Object.entries(westeros));
+
+      //   let keys = Object.keys(westeros);
+      //   console.log("Keys", keys);
+
+      //   let vals = Object.values(westeros);
+      //   console.log("Vals", vals);
+
+      //   let entries = Object.entries(westeros);
+      //   console.log("Entries", entries);
+
+      //   console.log(entries[2][1]);
+      //   console.log(entries[4][1]);
+
+      //   // Exercise 1: Object Keys
+      //   // Instructions:
+      //   // Given an object person with properties name, age, and gender, use Object.keys() method to extract and
+      //   // return an array containing the keys of the object.
+
+      //   const person = {
+      //     name: "John",
+      //     age: 30,
+      //     gender: "male",
+      //   };
+
+      //   const keys = Object.keys(person);
+      //   console.log(keys);
+
+      //   // Exercise 2: Object Values
+      //   // Instructions:
+      //   // Given an object car with properties brand, model, and year, use Object.values() method to
+      //   // extract and return an array containing the values of the object.
+
+      //   let car = {
+      //     brand: "Kia",
+      //     model: "Sportage",
+      //     year: 2020,
+      //   };
+
+      //   const values = Object.values(car);
+      //   console.log(values);
+
+      //   // Exercise 3: Object Entries
+      //   // Instructions:
+      //   // Given an object fruits with properties apple, banana, and cherry, use Object.entries() method to extract
+      //   // and return an array containing the entries (key-value pairs) of the object.
+
+      //   let fruits = {
+      //     apple: "Red",
+      //     banana: "Yellow",
+      //     cherry: "Dark Red",
+      //   };
+
+      //   const entries = Object.entries(fruits);
+      //   console.log(entries);
+
+      //   // Exercise 4: Object Keys - Challenge
+      //   // Instructions:
+      //   // Given an object person with properties name, age, and gender, use Object.keys() method along with map()
+      //   // method to extract and return an array containing the keys of the object in uppercase.
+
+      //   let person = {
+      //     name: "Alexis",
+      //     age: "29",
+      //     gender: "female",
+      //   };
+
+      //   const keys = Object.keys(person).map((key) => key.toUpperCase());
+      //   console.log(keys);
+
+      //   // Exercise 5: Object Values - Challenge
+      //   // Instructions:
+      //   // Given an object car with properties brand, model, and year, use Object.values() method along with
+      //   // filter() method to extract and return an array containing the values of the object that are of string
+      //   // data type.
+
+      //   let car = {
+      //     brand: "Kia",
+      //     model: "Sportage",
+      //     year: 2020,
+      //   };
+
+      //   const values = Object.values(car).filter(
+      //     (value) => typeof value === "string"
+      //   );
+      //   console.log(values);
+
+      // KEYWORD CLASS TO CREATE CLASSES
+      class Animal {
+        constructor(name, species) {
+          this.name = name;
+          this.species = species;
+        }
+
+        bark() {
+          console.log(`I am a ${this.species} named ${this.name}.`);
+        }
+      }
+
+      const dog = new Animal("Buddy", "Dog");
+      dog.bark(); // Output: I am a Dog named Buddy.
+
+      // Exercise 1:
+      // Create a class Rectangle with a constructor that takes two parameters:
+      // width and height. The class should have a method getArea() that returns
+      // the area of the rectangle.
+
+      class Rectangle {
+        constructor(width, height) {
+          this.width = width;
+          this.height = height;
+        }
+
+        getArea() {
+          return this.width * this.height;
+        }
+      }
+
+      // Usage:
+      const rectangle = new Rectangle(5, 10);
+      console.log(rectangle.getArea()); // Output: 50
+
+      // Exercise 2:
+      // Create a class Person with a constructor that takes two parameters:
+      // name and age. The class should have a method greet() that returns a greeting
+      // string with the name and age of the person.
+
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        greet() {
+          return `Hello, my name is ${this.name} and I'm ${this.age} years old.`;
+        }
+      }
+
+      // Usage:
+      const person = new Person("John", 30);
+      console.log(person.greet()); // Output: Hello, my name is John and I'm 30 years old.
+
+      // Exercise 3:
+      // Create a class Circle with a constructor that takes one parameter: radius.
+      // The class should have a method getArea() that returns the area of the circle.
+
+      class Circle {
+        constructor(radius) {
+          this.radius = radius;
+        }
+
+        getArea() {
+          return Math.PI * this.radius * this.radius;
+        }
+      }
+
+      // Usage:
+      const circle = new Circle(5);
+      console.log(circle.getArea()); // Output: 78.53981633974483
+
+      // EJERCICIO NOSOTROS SOLOS: PARA PONER MOVIES
+
+      class Movie {
+        constructor(title, year) {
+          this.title = title;
+          this.year = year;
+        }
+
+        newMovie() {
+          console.log(`The movie ${this.title} was released in ${this.year}.`);
+        }
+      }
+      const movie = new Movie("The Parent Trap", "1998");
+      movie.newMovie();
+
+      // // REGULAR EXPRESSIONS
+
+      // // Exercise: TESTING NUMBERS
+      // // Write a function called validateNumberInput(input) that takes a single parameter input and
+      // // returns true if input contains only numeric characters (0-9), and false otherwise.
+
+      // // Function to validate number input
+      // function validateNumberInput(input) {
+      //   const pattern = /^[0-9]+$/;
+      //   return pattern.test(input);
+      // }
+
+      // // Test cases
+      // const input1 = "12345"; // valid input
+      // const input2 = "0";     // valid input
+      // const input3 = "abc";   // invalid input
+      // const input4 = "123a";  // invalid input
+
+      // console.log(validateNumberInput(input1)); // Output: true
+      // console.log(validateNumberInput(input2)); // Output: true
+      // console.log(validateNumberInput(input3)); // Output: false
+      // console.log(validateNumberInput(input4)); // Output: false
+
+      // // The validateNumberInput() function takes an input as a parameter and uses a regular
+      // // expression /^[0-9]+$/ to test if the input contains only numeric characters.
+      // // The ^ symbol denotes the start of the string, [0-9] is a character class that matches
+      // // any digit from 0 to 9, + means one or more occurrences, and $ denotes the end of the string.
+      // // The test() method of the regular expression is used to check if the input matches the pattern,
+      // // and the function returns true if it does, and false otherwise.
+
+      // // REGULAR EXPRESSION ONLY TESTING LETTERS INSTEAD OF NUMBERS
+
+      // // Function to validate letter input
+      // function validateLetterInput(input) {
+      //   const pattern = /^[a-zA-Z]+$/;
+      //   return pattern.test(input);
+      // }
+
+      // // Test cases
+      // const input1 = "abc";   // valid input
+      // const input2 = "XYZ";   // valid input
+      // const input3 = "123";   // invalid input
+      // const input4 = "abc1";  // invalid input
+
+      // console.log(validateLetterInput(input1)); // Output: true
+      // console.log(validateLetterInput(input2)); // Output: true
+      // console.log(validateLetterInput(input3)); // Output: false
+      // console.log(validateLetterInput(input4)); // Output: false
+
+      // // REGULAR EXP UPPER CASE LETTERS
+      // // Function to validate uppercase letter input
+      // function validateUppercaseLetterInput(input) {
+      //   const pattern = /^[A-Z]+$/;
+      //   return pattern.test(input);
+      // }
+
+      // // Test cases
+      // const input1 = "ABC";   // valid input
+      // const input2 = "XYZ";   // valid input
+      // const input3 = "AbC";   // invalid input
+      // const input4 = "123";   // invalid input
+
+      // console.log(validateUppercaseLetterInput(input1)); // Output: true
+      // console.log(validateUppercaseLetterInput(input2)); // Output: true
+      // console.log(validateUppercaseLetterInput(input3)); // Output: false
+      // console.log(validateUppercaseLetterInput(input4)); // Output: false
+
+      // Create a function validateEmail(email)
+      // that takes a single parameter email and validates if it is a valid email address using
+      // regular expressions. The function should return true if the email is valid and false otherwise.
+
+      // Solution:
+
+      // function validateEmail(email) {
+      //   // Regular expression pattern for email validation
+      //   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      //   return emailPattern.test(email);
+      // }
+
+      // // Test cases
+      // console.log(validateEmail("example@example.com")); // true
+      // console.log(validateEmail("example@.com")); // false
+      // console.log(validateEmail("example@com")); // false
+      // console.log(validateEmail("example.com")); // false
+      // console.log(validateEmail("example@website.co.uk")); // true
+
+      // /^[^\s@]+@[^\s@]+\.[^\s@]+$/:
+
+      // ^: This is the start of the string anchor, which indicates that the pattern must start
+      // matching from the beginning of the string.
+
+      // [^\s@]+: This is a character class that matches one or more characters that are not whitespace (\s)
+      // or at sign (@). The ^ at the beginning of the character class negates it, so it matches any character
+      // except whitespace and at sign.
+
+      // @: This matches the at sign (@) character.
+
+      // [^\s@]+: This is another character class that matches one or more characters that are not whitespace
+      // or at sign, similar to the previous one.
+
+      // \.: This matches a period (.) character. The backslash \ is used to escape the period, as it has a special
+      // meaning in regular expressions.
+
+      // [^\s@]+: This is the third occurrence of the character class that matches one or more characters that are
+      // not whitespace or at sign.
+
+      // $: This is the end of the string anchor, which indicates that the pattern must end matching at the end of
+      // the string.
+
+      // In summary, this regular expression is used for validating email addresses and it ensures that the email
+      // address has a non-whitespace character before and after the at sign, and a period after the at sign
+      // followed by one or more non-whitespace characters.
+    </script>
+  </body>
+</html>
