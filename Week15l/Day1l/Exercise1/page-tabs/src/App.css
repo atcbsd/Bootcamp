@@ -1,0 +1,37 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  nav li {
+    margin: 0 10px;
+  }
+  
+  nav button {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  
+  nav button:hover {
+    color: #ff6b6b;
+  }
+  
+  /* Main styles */
+  main {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }

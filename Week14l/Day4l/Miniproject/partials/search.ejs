@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RSS Facts Feed - Search</title>
+    <% include partials/head %>
+  </head>
+  <body>
+    <% include partials/header %>
+    <div class="container">
+      <h1>Search Posts</h1>
+      <form action="/search/title" method="POST">
+        <input type="text" name="title" placeholder="Search by title" />
+        <button type="submit">Search</button>
+      </form>
+      <form action="/search/category" method="POST">
+        <select name="category">
+          <option value="animals">Animals</option>
+          <option value="history">History</option>
+          <option value="science">Science</option>
+          <option value="technology">Technology</option>
+        </select>
+        <button type="submit">Search</button>
+      </form>
+      <% include partials/posts %>
+    </div>
+    <% include partials/footer %>
+  </body>
+</html>

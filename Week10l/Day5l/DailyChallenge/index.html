@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Converter</title>
+    <style>
+      body {
+        font-family: "Gill Sans", sans-serif;
+        background: rgb(238, 174, 202);
+        background: radial-gradient(
+          circle,
+          rgba(238, 174, 202, 1) 0%,
+          rgba(148, 215, 233, 1) 100%
+        );
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 400px;
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      select,
+      input {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #6ecdda;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+
+      button:hover {
+        background-color: #456ea0;
+      }
+
+      #result {
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>CURRENCY CONVERTER</h1>
+      <label for="from">From:</label>
+      <select id="from">
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="MXN">MXN</option>
+        <option value="COP">COP</option>
+        <option value="ILS">ILS</option>
+        <option value="MAD">MAD</option>
+        <option value="NOK">NOK</option>
+        <option value="PEN">PEN</option>
+        <option value="VES">VES</option>
+      </select>
+      <br />
+      <label for="to">To:</label>
+      <select id="to">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="MXN">MXN</option>
+        <option value="COP">COP</option>
+        <option value="ILS">ILS</option>
+        <option value="MAD">MAD</option>
+        <option value="NOK">NOK</option>
+        <option value="PEN">PEN</option>
+        <option value="VES">VES</option>
+      </select>
+      <br />
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" />
+      <br />
+      <button id="convertBtn">Convert</button>
+      <button id="switchBtn">Switch</button>
+      <br />
+      <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Wars Web App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+
+    <style>
+      body {
+        background-color: #000;
+      }
+
+      .main {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        height: 1px;
+        width: 1px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: -24vw -44vh 2px 2px #fff, 38vw -4vh 0px 0px #fff,
+          -20vw -48vh 1px 2px #fff, -39vw 38vh 3px 1px #fff,
+          -42vw -11vh 0px 3px #fff, 12vw 15vh 3px 3px #fff,
+          42vw 6vh 3px 2px #fff, -8vw 9vh 0px 2px #fff, 34vw -38vh 1px 0px #fff,
+          -17vw 45vh 3px 1px #fff, 22vw -36vh 3px 2px #fff,
+          -42vw 1vh 1px 0px #fff;
+        animation: zoom 10s alternate infinite;
+      }
+
+      @keyframes zoom {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.5);
+        }
+      }
+      body {
+        background-color: #000;
+        font-family: "Arial", sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      #character-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #000;
+        border: 3px solid #ffcf2d;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ffcf2d;
+      }
+
+      #get-character-btn {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ffcf2d;
+        color: #000;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin-top: 20px;
+        border-top: 1px solid #fff;
+      }
+
+      #get-character-btn:hover {
+        background-color: #f8e600;
+        color: #000;
+      }
+
+      .fa-spinner {
+        font-size: 3rem;
+        margin: 2rem;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main"></div>
+    <div id="character-info">
+      <!-- Character information will be appended here -->
+    </div>
+    <button id="get-character-btn">Get Random Character</button>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<div class="posts">
+    <% if (typeof posts !== 'undefined' && posts.length > 0) { %> <%
+    posts.forEach((post) => { %>
+    <div class="post">
+      <a href="<%= post.link %>">
+        <h2><%= post.title %></h2>
+      </a>
+      <p>Publication Date: <%= post.pubDate %></p>
+      <p>Creator: <%= post.creator %></p>
+      <p>Category: <%= post.categories.join(', ') %></p>
+      <p><%= post.contentSnippet %></p>
+    </div>
+    <% }) %> <% } else { %>
+    <p>No posts found.</p>
+    <% } %>
+  </div>

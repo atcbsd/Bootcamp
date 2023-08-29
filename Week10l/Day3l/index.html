@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch & Async/Await</title>
+  </head>
+  <body>
+    <div id="results"></div>
+    <h1>Users:</h1>
+    <ul></ul>
+
+    <script>
+      //   // 1. Awaiting A Promise Within An Await
+      //   // Example 1
+      //   function getUsername() {
+      //     return new Promise((resolve, reject) => {
+      //       resolve("John");
+      //     });
+      //   }
+
+      //   async function case1() {
+      //     let x = await getUsername();
+      //     console.log(x);
+      //   }
+
+      //   case1();
+
+      //   //       2. Promise Rejection
+      //   // In case the Promise is rejected, the rejected value is returned.
+
+      //   // The following code shows how this value can be displayed:
+
+      //   async function case2() {
+      //     try {
+      //       let z = await Promise.reject(20);
+      //     } catch (e) {
+      //       console.error("in the catch", e);
+      //     }
+      //   }
+
+      //   case2();
+
+      //   async function foo() {
+      //     return "Hey";
+      //   }
+
+      //   foo();
+
+      //   // …is equivalent to:
+
+      //   function foo() {
+      //     return Promise.resolve("Hey");
+      //   }
+
+      //   foo();
+
+      //   async function foo() {
+      //     await 1;
+      //   }
+
+      //   // …is equivalent to:
+
+      //   function foo() {
+      //     return Promise.resolve(1).then(() => undefined);
+      //   }
+
+      //   // Exercise 2: Fetching Data with Error Handling
+      //   // Instructions:
+      //   // Write a function that fetches data from a given URL and returns the result using async/await.
+      //   // Handle any errors that may occur during the fetching process.
+
+      //   async function fetchDataWithErrorHandling(url) {
+      //     try {
+      //       const response = await fetch(url);
+      //       const data = await response.json();
+      //       return data;
+      //     } catch (error) {
+      //       console.error(error);
+      //     }
+      //   }
+
+      //   // Example usage:
+      //   fetchDataWithErrorHandling(
+      //     "https://jsonplaceholder.typicode.com/todos/1"
+      //   ).then((data) => console.log(data));
+
+      //   const clickHandler = async () => {
+      //     try {
+      //       const res = await fetch("https://reqres.in/api/users");
+      //       const data = await res.json();
+
+      //       if (!res.ok) {
+      //         console.log("Problem");
+      //         return;
+      //       }
+      //       console.log(data);
+      //     } catch (error) {
+      //       console.log(error);
+      //     }
+      //   };
+
+      //   clickHandler();
+
+      //  // Excercise: Create a function called getRandomNumber that returns a random number between 1 and 10 after a delay of 1 second. Use promises to implement this function.
+
+      //   function getRandomNumber() {
+      //     return new Promise((resolve) => {
+      //       setTimeout(() => {
+      //         const randomNum = Math.floor(Math.random() * 10) + 1;
+      //         resolve(randomNum);
+      //       }, 1000);
+      //     });
+      //   }
+      //   getRandomNumber()
+      //     .then((num) => console.log(`Random number is ${num}`))
+      //     .catch((err) => console.error(err));
+
+      //   // Using async/await
+      //   // Re-implement the previous getRandomNumber function using async/await
+      //   // Solution:
+
+      //   function delay(ms) {
+      //     return new Promise((resolve) => {
+      //       setTimeout(resolve, ms);
+      //     });
+      //   }
+
+      //   async function getRandomNumber() {
+      //     await delay(1000);
+      //     const randomNum = Math.floor(Math.random() * 10) + 1;
+      //     return randomNum;
+      //   }
+
+      //   (async function () {
+      //     try {
+      //       const num = await getRandomNumber();
+      //       console.log(`Random number is ${num}`);
+      //     } catch (err) {
+      //       console.error(err);
+      //     }
+      //   })();
+
+      // Fetch API - Using Async/Aawait
+
+      //   const fetchSunRise = async (endpoint) => {
+      //     const response = await fetch(endpoint);
+      //     // console.log("response", response);
+      //     let data = await response.json();
+      //     // console.log("data", data);
+      //     let sunrise = data.results.sunrise;
+      //     console.log(`The hour of the sunrise in Tel Aviv is: ${sunrise}`);
+      //   };
+
+      //   fetchSunRise(
+      //     "https://api.sunrise-sunset.org/json?lat=32.0853&lng=34.7818"
+      //   );
+
+      //   const fetchSunRise = async (endpoint) => {
+      //     try {
+      //       const response = await fetch(endpoint);
+      //       if (response.status == 400) {
+      //         throw new Error("Something went wrong");
+      //       } else {
+      //         console.log("response", response);
+      //         hey; // undefined variable
+      //         let data = await response.json();
+      //         console.log("data", data);
+      //         let sunrise = data.results.sunrise;
+      //         console.log(`The hour of the sunrise in Tel Aviv is: ${sunrise}`);
+      //       }
+      //     } catch (err) {
+      //       console.log("In the catch ", err);
+      //     }
+      //   };
+
+      //   fetchSunRise("https://api.sunrise-sunset.org/json?lat=0.0853&lng=0.7818");
+
+      async function loadUsers() {
+        return (await fetch("data/users.json")).json();
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        let users = [];
+        try {
+          users = await loadUsers();
+        } catch (e) {
+          console.log("Error!");
+          console.log(e);
+        }
+
+        // Select the container element where you want to display the user information
+        const container = document.getElementById("results");
+
+        // Iterate over the users and create HTML elements to display their information
+        users.forEach((user) => {
+          const userElement = document.createElement("div");
+          userElement.innerHTML = `ID: ${user.id}, Username: ${user.username}, Age: ${user.age}`;
+          container.appendChild(userElement);
+        });
+      });
+
+      // <>
+      //     fetch("https://jsonplaceholder.typicode.com/users")
+      //     .then(res => {
+      //         return res.json();
+      //     }).then(data => {
+      //         data.forEach(user => {
+      //             const markup = `<li>${user.name}</li>`;
+
+      //             document.querySelector("ul").insertAdjacentHTML("beforeend", markup);
+      //         })
+      //     }) .catch(error => console.log(error));
+
+      // USING EXTERNAL DATA WITH ASYNC AWAIT INSTEAD OF .THEN
+
+      //     async function fetchData() {
+      //       try {
+      //         const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      //         const data = await res.json();
+
+      //         data.forEach(user => {
+      //           const markup = `<li>${user.name}</li>`;
+      //           document.querySelector("ul").insertAdjacentHTML("beforeend", markup);
+      //         });
+
+      //       } catch (error) {
+      //         console.log(error);
+      //       }
+      //     }
+
+      //     fetchData();
+      //
+    </script>
+  </body>
+</html>
